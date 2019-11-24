@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GameCollector.ProfilePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Log Out" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+            <BoxView BackgroundColor="#2196F3" Grid.Row="0"
+                     Grid.RowSpan="2"/>
+            <StackLayout Grid.Row="1" Padding="0,50,0,0">
+                <Label Text="Matix02" HorizontalTextAlignment="Center"
+                       FontSize="25"
+                       TextColor="White"/>
+            </StackLayout>
+            <Grid Grid.Row="2" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Frame WidthRequest="50" HeightRequest="50"
+                           Grid.Column="0" CornerRadius="15"
+                           HorizontalOptions="Fill">
+                    <FlexLayout Direction="Column" >
+                        <Label Text="Played:" HorizontalTextAlignment="Center"/>
+                        <Label Text="108" HorizontalTextAlignment="Center"
+                               TextColor="#2196F3"/>
+                    </FlexLayout>
+                </Frame>
+                <Frame WidthRequest="50" HeightRequest="50"
+                       Grid.Column="1" CornerRadius="15">
+                    <FlexLayout Direction="Column">
+                        <Label Text="Playing:" HorizontalTextAlignment="Center"/>
+                        <Label Text="55" HorizontalTextAlignment="Center" TextColor="#2196F3"/>
+                    </FlexLayout>
+                </Frame>
+                <Frame WidthRequest="50" HeightRequest="50"
+                       Grid.Column="2" CornerRadius="15">
+                    <FlexLayout Direction="Column">
+                        <Label Text="Will Play:" HorizontalTextAlignment="Center"/>
+                        <Label Text="550" HorizontalTextAlignment="Center" 
+                               TextColor="#2196F3"/>
+                    </FlexLayout>
+                </Frame>
+            </Grid>
+            <ProgressBar Opacity="0.8" ProgressColor="#2196F3" Grid.Row="3"/>
+
+            <Picker Title="Select Langauge" Grid.Row="4" Margin="10"
+                                            >
+                <Picker.Items >
+                    <x:String>Polish</x:String>
+                    <x:String>English</x:String>
+                </Picker.Items>
+            </Picker>
+            <!-- 
+            <TableView Grid.Row="3" HeightRequest="135">
+                <TableRoot>
+                    <TableSection Title="Language:" TextColor="#2196F3">
+                        <SwitchCell Text="Polski" />
+                        <SwitchCell Text="English" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            -->
+            <!--  <StackLayout Grid.Row="4" Orientation="Horizontal"
+                         Margin="20">
+                <Label
+                Text="Data Rejestracji:"/>
+                <Label Text="24-02-2019" />
+            </StackLayout>-->
+
+
+            <!--<Image Source="https://i.imgur.com/qE2bXHf.png" HorizontalOptions="Center" VerticalOptions="End"
+                   WidthRequest="150" HeightRequest="150" TranslationY="50"/>-->
+            <ImageButton x:Name="avatarIb"
+                 HorizontalOptions="Center" VerticalOptions="End"
+                         WidthRequest="150" HeightRequest="150" TranslationY="50" BackgroundColor="Transparent"
+                         BorderColor="Transparent" Clicked="ImageButton_Clicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

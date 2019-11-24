@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="GameCollector.AvatarPage">
+    <ContentPage.Content>
+        <CollectionView 
+            x:Name="avatarLv"
+            SelectionMode="Single" >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
+                        <!-- ffImageLoading działa chyba tylko przy pomocy Binding, przynajmniej w obecnym stanie-->
+                        <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source="{Binding Img}"
+                            CacheType="All"/>
+                        <!--<Image Source="https://i.imgur.com/qE2bXHf.png"/>-->
+                        <!-- <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source = "https://i.imgur.com/qE2bXHf.png"
+                            CacheType="All"/>
+                        <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source = "https://i.imgur.com/NPxrNAy.png"
+                            CacheType="All"/>
+                        <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source = "https://i.imgur.com/4Nk1yPB.png"
+                            CacheType="All"/>
+                        <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source = "https://i.imgur.com/3pMgxfv.png"
+                            CacheType="All"/>-->
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </ContentPage.Content>
+</ContentPage>

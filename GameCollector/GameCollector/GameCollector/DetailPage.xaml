@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GameCollector.DetailPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="imgBG" Aspect="AspectFill" Grid.Row="0"/>
+                <BoxView BackgroundColor="Black" Opacity="0.4" Grid.Row="0"/>
+                <Grid Grid.Row="0" Padding="5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="0" >
+                        <Button x:Name="btnPs4"
+                            Text="ps4"   
+                                IsVisible="False"
+                    HeightRequest="35" 
+                    CornerRadius="3"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Button x:Name="btnXboxOne"
+                            Text="XONE"  
+                                IsVisible="False"
+                    BackgroundColor="Green"
+                        HeightRequest="35" 
+                    CornerRadius="3"/>
+                    </StackLayout>
+                    <StackLayout  Grid.Column="2">
+                        <Button x:Name="btnPc"
+                                IsVisible="False"
+                            Text="Pc" 
+                        BackgroundColor="Black"
+                        HeightRequest="35" 
+                    WidthRequest="50"
+                    CornerRadius="3" />
+                    </StackLayout>
+                    <StackLayout Grid.Column="3" >
+                        <Button x:Name="btnXbox360"
+                            Text="x360" 
+                            WidthRequest="100"
+                            BackgroundColor="LimeGreen"
+                                IsVisible="False"
+                            HeightRequest="35"
+                            CornerRadius="3" />
+                    </StackLayout>
+                    <StackLayout Grid.Column="4">
+                        <Button x:Name="btnPs3"
+                            Text="Ps3" 
+                        BackgroundColor="DarkBlue"
+                                IsVisible="False"
+                        HeightRequest="35" 
+                        WidthRequest="50"
+                        CornerRadius="3"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1" Margin="5,30" 
+                  Padding="0,90,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame WidthRequest="50" HeightRequest="50"
+                           Grid.Column="0" CornerRadius="15"
+                           HorizontalOptions="Fill">
+                    <!-- Zmiana list w której gra ma się znajdować poprzez ImageButton-->
+                        <FlexLayout Direction="Column" >
+                            <Label Text="Played" HorizontalTextAlignment="Center"/>
+                            <ImageButton Source=""/>
+                        </FlexLayout>
+                    </Frame>
+                    <Frame WidthRequest="50" HeightRequest="50"
+                       Grid.Column="1" CornerRadius="15">
+                        <FlexLayout Direction="Column">
+                            <Label Text="Playing:" HorizontalTextAlignment="Center"/>
+                            <ImageButton Source=""/>
+                        </FlexLayout>
+                    </Frame>
+                    <Frame WidthRequest="50" HeightRequest="50"
+                       Grid.Column="2" CornerRadius="15">
+                        <FlexLayout Direction="Column">
+                            <Label Text="Will Play" HorizontalTextAlignment="Center"/>
+                            <ImageButton Source=""/>
+                        </FlexLayout>
+                    </Frame>
+
+                </Grid>
+                <!-- Dodać takie rozrysowanie, przedział na wszystkie obecne 6 kafelków,
+        które miały by wewnętrzną obówdkę, takie same jak w kursie na udemy-->
+                <Grid Grid.Row="2" Margin="5,0" 
+                  Padding="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <!-- <ColumnDefinition Width="*"/> -->
+                    </Grid.ColumnDefinitions>
+                    <!-- Tam gdzie będzie się znajdować dana gra(zakładka),
+                może być ten button w alternatywnej wersji - inny kolor,
+                podświetlenie -->
+                    <Frame WidthRequest="50" HeightRequest="50"
+                           Grid.Column="0" CornerRadius="15"
+                           HorizontalOptions="Fill">
+                        <!-- Zapomniałem o publisherze, i nie wiadomo czy 
+                        da się przeprowadzić migrację w sposób, który nie wywoła ogólnego kataklizmu-->
+                        <FlexLayout Direction="Column" >
+                            <Label Text="Developer:" HorizontalTextAlignment="Center"/>
+                            <Label x:Name="labDev" HorizontalTextAlignment="Center"
+                               TextColor="#2196F3"/>
+                        </FlexLayout>
+                    </Frame>
+                    <Frame WidthRequest="50" HeightRequest="50"
+                       Grid.Column="1" CornerRadius="15">
+                        <FlexLayout Direction="Column">
+                            <Label Text="Premiera:" HorizontalTextAlignment="Center"/>
+                            <Label x:Name="labDate" 
+                                   
+                                   HorizontalTextAlignment="Center" 
+                                   TextColor="#2196F3"/>
+                        </FlexLayout>
+                    </Frame>
+               <!--    <Frame WidthRequest="50" HeightRequest="50"
+                       Grid.Column="2" CornerRadius="15">
+                        <FlexLayout Direction="Column">
+                            <Label Text="Publisher:" HorizontalTextAlignment="Center"/>
+                            <Label Text="Gearbox Software" HorizontalTextAlignment="Center" 
+                               TextColor="#2196F3"/>
+                        </FlexLayout>
+                    </Frame>-->
+                </Grid>
+                <!--
+            <Grid Grid.Row="1" Padding="0,90,0,0" Margin="5,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="Developer" HorizontalTextAlignment="Center" TextColor="Black"/>
+                <Label Text="2K" HorizontalTextAlignment="Center" TextColor="Blue"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1">
+                <Label Text="Data Premiery:" HorizontalTextAlignment="Center" TextColor="Black"/>
+                <Label Text="14.05.2019" HorizontalTextAlignment="Center" TextColor="Blue"/>
+            </StackLayout>
+            <StackLayout Grid.Column="2">
+                <Label Text="Publisher:" HorizontalTextAlignment="Center" TextColor="Black"/>
+                <Label Text="Gearbox Software" HorizontalTextAlignment="Center" TextColor="Blue"/>
+            </StackLayout>
+        </Grid>-->
+                <!-- Ustawić by w poziomym widoku  obieky był 
+        ustawiony na centrum-->
+                <CarouselView x:Name="LvDlcs"
+                          HorizontalOptions="Center"
+                          VerticalOptions="CenterAndExpand" Grid.Row="3"
+                      HeightRequest="250">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <FlexLayout>
+                                <Frame CornerRadius="3"  HasShadow="False" Margin="10"
+                           WidthRequest="300" HeightRequest="220" 
+                           IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <StackLayout>
+                                        <Image Source="{Binding Img}"
+                                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                       Aspect="Fill"
+                                       Margin="-15"/>
+                                        <StackLayout >
+                                            <Button Text="{Binding Rate}"/>
+                                            <!-- *Naprawić picker, żeby ocenianie się dało na button przerzucić-->
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </FlexLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <Image x:Name="imgCover"  
+               HeightRequest="200" HorizontalOptions="Center"
+                 WidthRequest="170" VerticalOptions="End" TranslationY="80"/>
+                <Button x:Name="btnMainRate"
+                    WidthRequest="55"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    CornerRadius="100"
+                    HeightRequest="55"
+                    TranslationX="65"
+                    TranslationY="185" />
+                <!--<Picker Title="Rate" 
+                    TranslationX="35"
+                    TranslationY="80"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    TitleColor="#2196F3"
+                    TextColor="#2196F3"
+                    WidthRequest="40">
+                <Picker.Items >
+                    <x:String>5</x:String>
+                    <x:String>1</x:String>
+                </Picker.Items>
+            </Picker>-->
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

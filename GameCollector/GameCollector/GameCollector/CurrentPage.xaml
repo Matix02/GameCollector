@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="GameCollector.CurrentPage">
+    <ContentPage.Content>
+        <CollectionView x:Name="myGameLv"
+                        SelectionMode="Single"
+                        Margin="5, 0, 5, 0" 
+                        SelectionChanged="GameListView_SelectionChanged">
+            <CollectionView.ItemsLayout>
+                <!--Poziomy tryb powinien obsługiwać 4/5 gier, pionowy 3-->
+                <!-- Nie znalaziono sposobu na ustawienie gier o mniejszej wielkości na środku -->
+                <!-- Kręcenie się elementu podczas ładowania bazy z offline do online, tak samo jak w przypadku aplikacji seriali-->
+                <GridItemsLayout Orientation="Vertical" Span="3"  />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate >
+                <DataTemplate>
+                    <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source = "{Binding Img}"
+                            CacheType="All"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>

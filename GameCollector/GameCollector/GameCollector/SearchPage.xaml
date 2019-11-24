@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="GameCollector.SearchPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="mainSearchBar" 
+                       Placeholder="Search a Game"
+                       PlaceholderColor="{StaticResource blueColor}"/>
+            <!-- Mozliwość, że cześć stacklayout, jak i podwłaściwości row.... itd. nie jest potrzebna,
+            zneutralizować niepotrzebne elementy-->
+            <ListView x:Name="gameListView" RowHeight="150">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid RowSpacing="0" 
+                                  Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage 
+                                                            DownsampleToViewSize="true"
+                                                            Source = "{Binding Img}"
+                                                            CacheType="All"
+                                    Grid.Column="0"/>
+                                <Grid Grid.Column="1" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Button Text="Hisotry" Grid.Row="0" />
+                                    <Button Text="Now" Grid.Row="1" />
+                                    <Button Text="Future" Grid.Row="2" />
+                                </Grid>
+                            </Grid>
+                            </StackLayout>
+                            <!-- <StackLayout Orientation="Horizontal" 
+                                         >
+                                <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            
+                            Source = "{Binding Img}"
+                            CacheType="All"/>
+                                <StackLayout Orientation="Vertical">
+                                    <Button Text="Hisotry" Grid.Row="0" />
+                                    <Button Text="Now" Grid.Row="1" />
+                                    <Button Text="Future" Grid.Row="2" />
+                                </StackLayout>
+                            </StackLayout>
+                        
+-->
+                        <!-- <TextCell
+                            Text="{Binding Title}">
+                         <ffimageloading:CachedImage Aspect="AspectFit"
+			                DownsampleToViewSize="true"
+                            Source = "{Binding Image}"
+                            CacheType="All"/>
+                             
+                        </TextCell>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <!--Poziomy tryb powinien obsługiwać 4/5 gier, pionowy 3-->
+            <!-- Nie znalaziono sposobu na ustawienie gier o mniejszej wielkości na środku -->
+            <!-- Kręcenie się elementu podczas ładowania bazy z offline do online, tak samo jak w przypadku aplikacji seriali-->
+            <!--
+            <CollectionView x:Name="gameListView"
+                        SelectionMode="Single"
+                        Margin="5, 0, 5, 0">
+                <CollectionView.ItemsLayout>
+                   
+                    <GridItemsLayout Orientation="Vertical" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate >
+                    <DataTemplate >
+                        <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding Title}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView> -->
+            <!--
+            <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <Image Source="https://images-na.ssl-images-amazon.com/images/I/91AJ7qaZK4L._SL1500_.jpg" 
+                       Grid.Column="0" 
+                       WidthRequest="100"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Text="Hisotry" Grid.Row="0" />
+                        <Button Text="Now" Grid.Row="1" />
+                        <Button Text="Future" Grid.Row="2" />
+                    </Grid>
+                </StackLayout>
+            </ScrollView>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
