@@ -10,6 +10,7 @@ Going forward, we have TabbedPage splitted on three Pages:
 - Playing - Now
 - Wanna Play - In the future
 - Finished. 
+
 To make them full, need to use Search Button and find our title, then choose button with name of these three pages to ascribe to them. The game is showing as a cover - Image.
 Every game in the lists have their details like: -Relase Date, -Developer, - Our Rate and etc.
 
