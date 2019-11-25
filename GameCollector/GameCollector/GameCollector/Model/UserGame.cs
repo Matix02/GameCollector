@@ -13,7 +13,7 @@ namespace GameCollector.Model
         public int Rate { get; set; }
         public string Img { get; set; }
         public string BackgroundImg { get; set; }
-        public string User_ID { get; set; }
+        public string User_ID { get; set; } 
         public string List { get; set; }
     }
     public class User

@@ -20,6 +20,14 @@ namespace GameCollector.Services
                 return JsonConvert.DeserializeObject<List<UserGame>>(response);
             }
         }
+        public async Task<bool> AddGame(UserGame userGame)
+        {
+            var client = new HttpClient();
+            var json = JsonConvert.SerializeObject(userGame);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", content);
+            return response.IsSuccessStatusCode;
+        }
         public async Task<List<Game>> SearchGame()
         {
             using (HttpClient client = new HttpClient())
