@@ -9,7 +9,8 @@
     <ContentPage.Content>
         <CollectionView 
             x:Name="avatarLv"
-            SelectionMode="Single" >
+            SelectionMode="Single" 
+            SelectionChanged="avatarLv_SelectionChanged">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="3"/>
             </CollectionView.ItemsLayout>

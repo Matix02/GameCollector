@@ -39,9 +39,15 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Button Text="Hisotry" Grid.Row="0" Clicked="HistoryButton_Clicked"/>
-                                    <Button Text="Now" Grid.Row="1" Clicked="NowButton_Clicked_1"/>
-                                    <Button Text="Future" Grid.Row="2" Clicked="FutureButton_Clicked_2"/>
+                                    <Button 
+                                        ClassId="History"
+                                        Text="History" Grid.Row="0" Clicked="AddButton_Clicked"/>
+                                    <Button
+                                        ClassId="Current"
+                                        Text="Now" Grid.Row="1" Clicked="AddButton_Clicked"/>
+                                    <Button 
+                                        ClassId="Future" 
+                                        Text="Future" Grid.Row="2" Clicked="AddButton_Clicked"/>
                                 </Grid>
                             </Grid>
                             </StackLayout>

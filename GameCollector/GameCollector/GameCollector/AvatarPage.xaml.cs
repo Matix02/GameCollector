@@ -32,6 +32,29 @@ namespace GameCollector
                     Avatars.Add(avatar);
             }
             avatarLv.ItemsSource = Avatars;
+            
+        }
+
+        private async void avatarLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedAv = avatarLv.SelectedItem as Avatar;
+
+            User userAv = new User()
+            {
+                Avatar = selectedAv.Img
+            };
+
+            ApiServices apiServices = new ApiServices();
+            bool response = await apiServices.EditAvatar("1", userAv);
+
+            if (response != true)
+            {
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+            }
+            else
+            {
+                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
+            }
         }
     }
 }

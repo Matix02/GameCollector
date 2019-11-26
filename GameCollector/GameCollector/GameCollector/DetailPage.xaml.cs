@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -63,6 +64,21 @@ namespace GameCollector
                 labDate.Text = String.Format("{0:MM/dd/yyyy}", dateTime);
                 
                 
+            }
+        }
+
+        private async void  ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            ApiServices apiServices = new ApiServices();
+            bool response = await apiServices.DeleteGame(selectedGame.ID);
+            
+            if (!response == true)
+            {
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+            }
+            else
+            {
+                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
             }
         }
     }

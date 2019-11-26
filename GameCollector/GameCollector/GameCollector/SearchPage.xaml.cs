@@ -17,23 +17,25 @@ namespace GameCollector
     public partial class SearchPage : ContentPage
     {
         public ObservableCollection<Game> MyGames;
-        public ObservableCollection<Game> Bufor;
+        public ObservableCollection<UserGame> Bufor;
         public List<String> titles;
+        public List<String> busyTitles;
 
         public static bool First = true;
         public SearchPage()
         {
             InitializeComponent();
             MyGames = new ObservableCollection<Game>();
-            Bufor = new ObservableCollection<Game>();
+            Bufor = new ObservableCollection<UserGame>();
             titles = new List<String>();
+            busyTitles = new List<String>();
             InitSearchBar();
 
         }
         void InitSearchBar()
         {
             string checkEmpty = mainSearchBar.Text;
-            if (string.IsNullOrEmpty(checkEmpty))
+            if(string.IsNullOrEmpty(checkEmpty))
             {
                 mainSearchBar.TextChanged += (s, e) => FilterItem(mainSearchBar.Text);
                 mainSearchBar.SearchButtonPressed += (s, e) => FilterItem(mainSearchBar.Text);
@@ -55,18 +57,35 @@ namespace GameCollector
 
                 foreach (var game in games)
                 {
-                    if (!titles.Contains(game.Title)){
+                    if(!titles.Contains(game.Title) && !busyTitles.Contains(game.Title))
+                    {
                         titles.Add(game.Title);
                         MyGames.Add(game);
                     }  
                 }
+                
                 gameListView.ItemsSource = MyGames.Where(x => x.Title.ToLower().Contains(filter.ToLower())).Distinct();
                 MyGames.Clear();
                 titles.Clear();
             }
             gameListView.EndRefresh();      
         }
-        
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            ApiServices apiServices = new ApiServices();
+            var games = await apiServices.GetMyGame();
+  //////sprawdzić jaka czy jest różnica jeśli chodzi o pręd., gdy WebApi zwraca dane metodą o argumencie ID user
+            foreach(var game in games)
+            {
+                if(game.User_ID == "1")
+                {
+                    Bufor.Add(game);
+                    busyTitles.Add(game.UserTitle);
+                }    
+            }
+        }
+
         //NoItemSelected
         private void gameListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -74,29 +93,33 @@ namespace GameCollector
             list.SelectedItem = null;
         }
 
-        private async void HistoryButton_Clicked(object sender, EventArgs e)
+        private async void AddButton_Clicked(object sender, EventArgs e)
         {
+            var button = (Button)sender;
+            var classID = button.ClassId;
             var list = (Game)((Button)sender).BindingContext;
-
+           
             var selectedGame = list;
-          /*  UserGame userGame = new UserGame()
+
+            string chosenList;
+            if (classID.Equals("History"))
+                chosenList = "History";
+            else if (classID.Equals("Future"))
+                chosenList = "Future";
+            else
+                chosenList = "Current";
+                
+                
+            UserGame userGame = new UserGame()
             {
                 UserTitle = selectedGame.Title,
                 Img = selectedGame.Img,
                 BackgroundImg = selectedGame.BackgroundImg,
                 Rate = 5,
                 User_ID = "1",
-                List = "Current"
-            };*/
-            UserGame userGame = new UserGame()
-            {
-                UserTitle = "Overwatch",
-                Img = "https://image.ceneostatic.pl/data/products/47973537/i-overwatch-origins-edition-digital.jpg",
-                BackgroundImg = "https://wallpaperplay.com/walls/full/1/1/3/223487.jpg",
-                Rate = 4,
-                User_ID = "1",
-                List = "Current"
+                List = chosenList
             };
+            
             ApiServices apiServices = new ApiServices();
             bool response = await apiServices.AddGame(userGame);
             if(response != true)
@@ -105,18 +128,8 @@ namespace GameCollector
             }
             else
             {
-                await DisplayAlert("Hi", "Your table has been reserved successfully", "Alright");
+                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
             }
-        }
-
-        private void NowButton_Clicked_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FutureButton_Clicked_2(object sender, EventArgs e)
-        {
-
         }
     }
 }

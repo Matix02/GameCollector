@@ -28,6 +28,26 @@ namespace GameCollector.Services
             var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", content);
             return response.IsSuccessStatusCode;
         }
+        public async Task<bool> DeleteGame(int id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var httpClient = new HttpClient();
+                var result = await httpClient.DeleteAsync(
+                    String.Concat("https://collectorgameapp.azurewebsites.net/api/Users/", id.ToString()));
+
+                return result.IsSuccessStatusCode;
+            }
+        }
+        public async Task<bool> EditAvatar(string id, User user)
+        {
+            var client = new HttpClient();
+            var json = JsonConvert.SerializeObject(user);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(String.Concat(
+                "https://collectorgameapp.azurewebsites.net/api/Users/", id),content);
+            return response.IsSuccessStatusCode;
+        }
         public async Task<List<Game>> SearchGame()
         {
             using (HttpClient client = new HttpClient())
@@ -56,5 +76,6 @@ namespace GameCollector.Services
                 return JsonConvert.DeserializeObject<List<Avatar>>(response);
             }
         }
+
     }
 }
