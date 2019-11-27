@@ -36,7 +36,6 @@ namespace GameCollector
             foreach (var submenu in selectedGame.UserDlcs)
             {
                 MyGames.Add(submenu);
-                
             }
             LvDlcs.ItemsSource = MyGames;
         }

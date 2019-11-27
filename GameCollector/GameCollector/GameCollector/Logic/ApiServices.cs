@@ -28,6 +28,26 @@ namespace GameCollector.Services
             var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", content);
             return response.IsSuccessStatusCode;
         }
+        public async Task<bool> AddDlc(ICollection<UserDlc> userDlcs)
+        {
+            var client = new HttpClient();
+
+            /*   for(int i=0; i<=count; i++)
+               {
+                  var  asd = JsonConvert.SerializeObject(userDlc);
+
+                   var sad = new StringContent(asd, Encoding.UTF8, "application/json");
+
+                   var res = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", sad);
+               }
+
+               var json = JsonConvert.SerializeObject(userDlc);*/              
+            string jsonString = JsonConvert.SerializeObject(userDlcs, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
+
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", content);
+            return response.IsSuccessStatusCode;
+        }
         public async Task<bool> DeleteGame(int id)
         {
             using (HttpClient client = new HttpClient())

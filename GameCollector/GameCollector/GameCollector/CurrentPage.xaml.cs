@@ -23,19 +23,18 @@ namespace GameCollector
         {
             InitializeComponent();
             //  MyGames = new ObservableCollection<UserGame>();
-
-    }
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             ApiServices apiServices = new ApiServices();
             var games = await apiServices.GetMyGame();
             foreach (var game in games)
-                {
-                    if (game.User_ID == "1" && game.List.Trim() == "Current")
-                        MyGames.Add(game);
+            {
+                if (game.User_ID == "1" && game.List.Trim() == "Current")
+                    MyGames.Add(game);
             }
-                myGameLv.ItemsSource = MyGames;
+            myGameLv.ItemsSource = MyGames;
         }
 
         private void GameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

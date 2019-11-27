@@ -17,7 +17,7 @@ namespace GameCollector
     public partial class SearchPage : ContentPage
     {
         public ObservableCollection<Game> MyGames;
-        public ObservableCollection<UserGame> Bufor;
+        public ObservableCollection<UserDlc> Bufor;
         public List<String> titles;
         public List<String> busyTitles;
 
@@ -26,7 +26,7 @@ namespace GameCollector
         {
             InitializeComponent();
             MyGames = new ObservableCollection<Game>();
-            Bufor = new ObservableCollection<UserGame>();
+            Bufor = new ObservableCollection<UserDlc>();
             titles = new List<String>();
             busyTitles = new List<String>();
             InitSearchBar();
@@ -80,7 +80,7 @@ namespace GameCollector
             {
                 if(game.User_ID == "1")
                 {
-                    Bufor.Add(game);
+                   // Bufor.Add(game);
                     busyTitles.Add(game.UserTitle);
                 }    
             }
@@ -101,6 +101,23 @@ namespace GameCollector
            
             var selectedGame = list;
 
+            Bufor = new ObservableCollection<UserDlc>();
+            foreach(var dlc in selectedGame.Dlcs)
+            {
+                UserDlc dodatki = new UserDlc()
+                {
+                    DlcTitle = dlc.DlcTitle,
+                    Img = dlc.Img,
+                    Rate = 5,
+                    Game_ID = selectedGame.ID
+                    
+                };
+                Bufor.Add(dodatki);
+            }
+            ApiServices apiServices = new ApiServices();
+            bool responseDlc = await apiServices.AddDlc(Bufor);
+
+
             string chosenList;
             if (classID.Equals("History"))
                 chosenList = "History";
@@ -109,7 +126,8 @@ namespace GameCollector
             else
                 chosenList = "Current";
                 
-                
+                //1. Pomsysł dodania kilku dlc przy pomocy pętli, gdzie wysyłamy te dlc do jednego Id kilkukrotnie
+                //2. Prób spakowania, prześledzenia tego jak się "rozpakowuje" json, bo przecież zwraca kilka/nascie elemn.
             UserGame userGame = new UserGame()
             {
                 UserTitle = selectedGame.Title,
@@ -119,8 +137,9 @@ namespace GameCollector
                 User_ID = "1",
                 List = chosenList
             };
+
             
-            ApiServices apiServices = new ApiServices();
+            
             bool response = await apiServices.AddGame(userGame);
             if(response != true)
             {

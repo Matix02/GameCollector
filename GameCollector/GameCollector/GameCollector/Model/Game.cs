@@ -7,7 +7,7 @@ namespace GameCollector.Logic
     public class Game 
     {
         public Developer Developer { get; set; }
-        public IList<object> Dlcs { get; set; }
+        public IList<Dodatki> Dlcs { get; set; }
         public Platform Platform { get; set; }
         public int ID { get; set; }
         public string Title { get; set; }
@@ -30,6 +30,12 @@ namespace GameCollector.Logic
         public int ID { get; set; }
         public string PlatformName { get; set; }
     }
-
+    public class Dodatki
+    {
+        public int ID { get; set; }
+        public string DlcTitle { get; set; }
+        public string Img { get; set; }
+        public int Game_ID { get; set; }
+    }
 
 }
