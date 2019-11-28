@@ -28,24 +28,12 @@ namespace GameCollector.Services
             var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", content);
             return response.IsSuccessStatusCode;
         }
-        public async Task<bool> AddDlc(ICollection<UserDlc> userDlcs)
+        public async Task<bool> AddDlc(UserDlc userDlcs)
         {
             var client = new HttpClient();
-
-            /*   for(int i=0; i<=count; i++)
-               {
-                  var  asd = JsonConvert.SerializeObject(userDlc);
-
-                   var sad = new StringContent(asd, Encoding.UTF8, "application/json");
-
-                   var res = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", sad);
-               }
-
-               var json = JsonConvert.SerializeObject(userDlc);*/              
-            string jsonString = JsonConvert.SerializeObject(userDlcs, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
-
-            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/Users", content);
+            var json = JsonConvert.SerializeObject(userDlcs);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://collectorgameapp.azurewebsites.net/api/dlc", content);
             return response.IsSuccessStatusCode;
         }
         public async Task<bool> DeleteGame(int id)
@@ -56,6 +44,16 @@ namespace GameCollector.Services
                 var result = await httpClient.DeleteAsync(
                     String.Concat("https://collectorgameapp.azurewebsites.net/api/Users/", id.ToString()));
 
+                return result.IsSuccessStatusCode;
+            }
+        }
+        public async Task<bool> DeleteDlc(int id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var httpClient = new HttpClient();
+                var result = await httpClient.DeleteAsync(
+                    String.Concat("https://collectorgameapp.azurewebsites.net/api/dlc/", id.ToString()));
                 return result.IsSuccessStatusCode;
             }
         }

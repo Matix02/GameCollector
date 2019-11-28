@@ -36,9 +36,11 @@
                 <Frame WidthRequest="50" HeightRequest="50"
                            Grid.Column="0" CornerRadius="15"
                            HorizontalOptions="Fill">
-                    <FlexLayout Direction="Column" >
+                    <FlexLayout  x:Name="asd"
+                        Direction="Column">
                         <Label Text="Played:" HorizontalTextAlignment="Center"/>
-                        <Label Text="108" HorizontalTextAlignment="Center"
+                        <Label x:Name="lPlayed"
+                             HorizontalTextAlignment="Center"
                                TextColor="#2196F3"/>
                     </FlexLayout>
                 </Frame>
@@ -46,14 +48,16 @@
                        Grid.Column="1" CornerRadius="15">
                     <FlexLayout Direction="Column">
                         <Label Text="Playing:" HorizontalTextAlignment="Center"/>
-                        <Label Text="55" HorizontalTextAlignment="Center" TextColor="#2196F3"/>
+                        <Label x:Name="lPlaying"
+                            Text="55" HorizontalTextAlignment="Center" TextColor="#2196F3"/>
                     </FlexLayout>
                 </Frame>
                 <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="2" CornerRadius="15">
                     <FlexLayout Direction="Column">
                         <Label Text="Will Play:" HorizontalTextAlignment="Center"/>
-                        <Label Text="550" HorizontalTextAlignment="Center" 
+                        <Label x:Name="lToPlay"
+                            Text="550" HorizontalTextAlignment="Center" 
                                TextColor="#2196F3"/>
                     </FlexLayout>
                 </Frame>
@@ -62,7 +66,7 @@
 
             <Picker Title="Select Langauge" Grid.Row="4" Margin="10"
                                             >
-                <Picker.Items >
+                <Picker.Items>
                     <x:String>Polish</x:String>
                     <x:String>English</x:String>
                 </Picker.Items>

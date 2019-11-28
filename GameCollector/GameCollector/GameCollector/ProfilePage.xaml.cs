@@ -16,6 +16,7 @@ namespace GameCollector
         public ProfilePage()
         {
             InitializeComponent();
+            
 
         }
         protected override async void OnAppearing()
@@ -23,13 +24,14 @@ namespace GameCollector
             base.OnAppearing();
             ApiServices apiServices = new ApiServices();
             var imgAvatars = await apiServices.GetMyGame();
-            
             foreach (var game in imgAvatars)
             {
                 if (game.User_ID == "1")
                 {//Zapewnić informacje jaki User teraz używa aplikacji,
                     //pamiętać o tym przy robieniu logowania/rejestracji
                     avatarIb.Source = game.User.Avatar;
+                    //lPlayed.Text = imgAvatars.Count;
+
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace GameCollector
     public partial class SearchPage : ContentPage
     {
         public ObservableCollection<Game> MyGames;
-        public ObservableCollection<UserDlc> Bufor;
+        public UserDlc Bufor;
         public List<String> titles;
         public List<String> busyTitles;
 
@@ -26,11 +26,10 @@ namespace GameCollector
         {
             InitializeComponent();
             MyGames = new ObservableCollection<Game>();
-            Bufor = new ObservableCollection<UserDlc>();
+            Bufor = new UserDlc();
             titles = new List<String>();
             busyTitles = new List<String>();
             InitSearchBar();
-
         }
         void InitSearchBar()
         {
@@ -95,30 +94,17 @@ namespace GameCollector
 
         private async void AddButton_Clicked(object sender, EventArgs e)
         {
+            int id;
+            string chosenList;
+            
             var button = (Button)sender;
             var classID = button.ClassId;
             var list = (Game)((Button)sender).BindingContext;
-           
             var selectedGame = list;
+            
 
-            Bufor = new ObservableCollection<UserDlc>();
-            foreach(var dlc in selectedGame.Dlcs)
-            {
-                UserDlc dodatki = new UserDlc()
-                {
-                    DlcTitle = dlc.DlcTitle,
-                    Img = dlc.Img,
-                    Rate = 5,
-                    Game_ID = selectedGame.ID
-                    
-                };
-                Bufor.Add(dodatki);
-            }
             ApiServices apiServices = new ApiServices();
-            bool responseDlc = await apiServices.AddDlc(Bufor);
 
-
-            string chosenList;
             if (classID.Equals("History"))
                 chosenList = "History";
             else if (classID.Equals("Future"))
@@ -138,10 +124,36 @@ namespace GameCollector
                 List = chosenList
             };
 
-            
-            
-            bool response = await apiServices.AddGame(userGame);
-            if(response != true)
+            bool responseGame = await apiServices.AddGame(userGame);
+
+            var games = await apiServices.GetMyGame();
+           /* foreach (var game in games)
+            {
+                //Modyfikacja User_ID
+                if (game.User_ID == "1" && game.UserTitle == userGame.UserTitle)
+                {
+                    id = game.ID;
+                    break;
+                }
+                    
+            }*/
+            id = (int)games.LastOrDefault().ID;
+
+            Bufor = new UserDlc();
+            foreach (var dlc in selectedGame.Dlcs)
+            {
+                UserDlc dodatki = new UserDlc()
+                {
+                    DlcTitle = dlc.DlcTitle,
+                    Img = dlc.Img,
+                    Rate = 5,
+                    Game_ID = id
+                };
+                Bufor = dodatki;
+                bool responseDlc = await apiServices.AddDlc(Bufor);
+            }
+
+            if (responseGame!=true)
             {
                 await DisplayAlert("Oops", "Something goes wrong", "Alright");
             }

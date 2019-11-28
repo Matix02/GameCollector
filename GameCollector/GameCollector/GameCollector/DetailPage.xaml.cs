@@ -61,17 +61,20 @@ namespace GameCollector
                 DateTime dateTime = game.RelaseDate;
 
                 labDate.Text = String.Format("{0:MM/dd/yyyy}", dateTime);
-                
-                
             }
         }
 
         private async void  ToolbarItem_Clicked(object sender, EventArgs e)
         {
+            //Utworzyć funkcję, do tych pętl, bo powtarzany jest KOD !!!!
             ApiServices apiServices = new ApiServices();
-            bool response = await apiServices.DeleteGame(selectedGame.ID);
+            foreach (var submenu in selectedGame.UserDlcs)
+            {
+                bool responseDlc = await apiServices.DeleteDlc(submenu.ID);
+            }
+            bool responseGame = await apiServices.DeleteGame(selectedGame.ID);
             
-            if (!response == true)
+            if (!responseGame == true)
             {
                 await DisplayAlert("Oops", "Something goes wrong", "Alright");
             }
