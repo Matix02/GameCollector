@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameCollector.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,6 @@ namespace GameCollector
         {
             InitializeComponent();
         }
-
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SearchPage());

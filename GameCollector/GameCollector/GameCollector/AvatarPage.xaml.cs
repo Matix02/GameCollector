@@ -32,7 +32,6 @@ namespace GameCollector
                     Avatars.Add(avatar);
             }
             avatarLv.ItemsSource = Avatars;
-            
         }
 
         private async void avatarLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +44,7 @@ namespace GameCollector
             };
 
             ApiServices apiServices = new ApiServices();
-            bool response = await apiServices.EditAvatar("1", userAv);
+            bool response = await apiServices.EditAvatar(App.myId, userAv);
 
             if (response != true)
             {

@@ -20,6 +20,42 @@ namespace GameCollector.Services
                 return JsonConvert.DeserializeObject<List<UserGame>>(response);
             }
         }
+        public async Task<List<User>> GetUser(string id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = "https://collectorgameapp.azurewebsites.net/api/Users";
+                string userId = id.ToString();
+                string fullUrl = Path.Combine(apiUrl, userId);
+                var response = await client.GetStringAsync(fullUrl);
+
+                return JsonConvert.DeserializeObject<List<User>>(response);
+            }
+        }
+        public async Task<List<User>> GetEveryone()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/AllUsers");
+                return JsonConvert.DeserializeObject<List<User>>(response);
+            }
+        }
+        public async Task<List<User>> LoginUser()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/api/Users");
+                return JsonConvert.DeserializeObject<List<User>>(response);
+            }
+        }
+        public async Task<bool> RegisterUser(User user)
+        {
+            var httpClient = new HttpClient();
+            var json = JsonConvert.SerializeObject(user);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("https://collectorgameapp.azurewebsites.net/Register", content);
+            return response.IsSuccessStatusCode;
+        }
         public async Task<bool> AddGame(UserGame userGame)
         {
             var client = new HttpClient();
@@ -57,13 +93,32 @@ namespace GameCollector.Services
                 return result.IsSuccessStatusCode;
             }
         }
-        public async Task<bool> EditAvatar(string id, User user)
+        public async Task<bool> EditAvatar(int id, User user)
         {
             var client = new HttpClient();
             var json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PutAsync(String.Concat(
                 "https://collectorgameapp.azurewebsites.net/api/Users/", id),content);
+            return response.IsSuccessStatusCode;
+        }
+        //Poprawić te dwie metody niżej 
+        public async Task<bool> EditGameRate(int id, UserGame userGame)
+        {
+            var client = new HttpClient();
+            var json = JsonConvert.SerializeObject(userGame);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(String.Concat(
+                "https://collectorgameapp.azurewebsites.net/RateGame/", id), content);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<bool> EditDlcRate(int id, UserDlc userDlc)
+        {
+            var client = new HttpClient();
+            var json = JsonConvert.SerializeObject(userDlc);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(String.Concat(
+                "https://collectorgameapp.azurewebsites.net/api/RateDlc/", id), content);
             return response.IsSuccessStatusCode;
         }
         public async Task<List<Game>> SearchGame()
@@ -94,6 +149,5 @@ namespace GameCollector.Services
                 return JsonConvert.DeserializeObject<List<Avatar>>(response);
             }
         }
-
     }
 }

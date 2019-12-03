@@ -100,7 +100,6 @@
                             <ImageButton Source=""/>
                         </FlexLayout>
                     </Frame>
-
                 </Grid>
                 <!-- Dodać takie rozrysowanie, przedział na wszystkie obecne 6 kafelków,
         które miały by wewnętrzną obówdkę, takie same jak w kursie na udemy-->
@@ -182,7 +181,7 @@
                                        Aspect="Fill"
                                        Margin="-15"/>
                                         <StackLayout >
-                                            <Button Text="{Binding Rate}"/>
+                                            <Button Text="{Binding Rate}" />
                                             <!-- *Naprawić picker, żeby ocenianie się dało na button przerzucić-->
                                         </StackLayout>
                                     </StackLayout>
@@ -201,7 +200,8 @@
                     CornerRadius="100"
                     HeightRequest="55"
                     TranslationX="65"
-                    TranslationY="185" />
+                    TranslationY="185" 
+                        Clicked="Button_Clicked"/>
                 <!--<Picker Title="Rate" 
                     TranslationX="35"
                     TranslationY="80"

@@ -31,7 +31,7 @@ namespace GameCollector
             var games = await apiServices.GetMyGame();
             foreach (var game in games)
             {
-                if (game.User_ID == "1" && game.List.Trim() == "Current")
+                if (game.User_ID == App.myId && game.List.Trim() == "Current")
                     MyGames.Add(game);
             }
             myGameLv.ItemsSource = MyGames;

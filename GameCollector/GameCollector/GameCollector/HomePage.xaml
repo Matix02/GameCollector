@@ -7,12 +7,16 @@
             mc:Ignorable="d"
              x:Class="GameCollector.HomePage">
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Add"
+        <ToolbarItem IconImageSource="add.png"
                      Clicked="ToolbarItem_Clicked"/>
-        <ToolbarItem Text="Profile"
-                     Clicked="ToolbarItem_Clicked_1"/>
+        <ToolbarItem 
+                     Clicked="ToolbarItem_Clicked_1" 
+                     IconImageSource="finished.png"/>
     </TabbedPage.ToolbarItems>
-    <local:HistoryPage/>
-    <local:CurrentPage />
-    <local:FuturePage/>
+    <local:HistoryPage Title="Want"
+        IconImageSource="more.png"/>
+    <local:CurrentPage Title="Playing"
+        IconImageSource="job.png"/>
+    <local:FuturePage Title="Played"
+        IconImageSource="kick.png"/>
 </TabbedPage>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +8,11 @@ namespace GameCollector
     public partial class App : Application
     {
         public static string DatabaseLocation = string.Empty;
+        public static MobileServiceClient MobileService =
+            new MobileServiceClient(
+                "https://collectorgameapp.azurewebsites.net"
+                );
+        public static int myId = 0;
         public App()
         {
             InitializeComponent();

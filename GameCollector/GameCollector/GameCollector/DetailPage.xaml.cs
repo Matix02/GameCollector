@@ -60,7 +60,7 @@ namespace GameCollector
                 labDev.Text = game.Developer.DeveloperName.ToString();
                 DateTime dateTime = game.RelaseDate;
 
-                labDate.Text = String.Format("{0:MM/dd/yyyy}", dateTime);
+                labDate.Text = String.Format("{0:dd/MM/yyyy}", dateTime);
             }
         }
 
@@ -82,6 +82,18 @@ namespace GameCollector
             {
                 await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
             }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var selectedTitle = selectedGame as UserGame;
+            Navigation.PushAsync(new RatePage(selectedGame));
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            var selectedTitle = selectedGame.UserDlcs as UserDlc;
+            Navigation.PushAsync(new RateDlcPage(selectedGame));
         }
     }
 }

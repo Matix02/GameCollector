@@ -49,7 +49,7 @@
                     <FlexLayout Direction="Column">
                         <Label Text="Playing:" HorizontalTextAlignment="Center"/>
                         <Label x:Name="lPlaying"
-                            Text="55" HorizontalTextAlignment="Center" TextColor="#2196F3"/>
+                            HorizontalTextAlignment="Center" TextColor="#2196F3"/>
                     </FlexLayout>
                 </Frame>
                 <Frame WidthRequest="50" HeightRequest="50"
@@ -57,7 +57,7 @@
                     <FlexLayout Direction="Column">
                         <Label Text="Will Play:" HorizontalTextAlignment="Center"/>
                         <Label x:Name="lToPlay"
-                            Text="550" HorizontalTextAlignment="Center" 
+                             HorizontalTextAlignment="Center" 
                                TextColor="#2196F3"/>
                     </FlexLayout>
                 </Frame>

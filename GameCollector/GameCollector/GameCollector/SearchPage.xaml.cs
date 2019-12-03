@@ -77,7 +77,7 @@ namespace GameCollector
   //////sprawdzić jaka czy jest różnica jeśli chodzi o pręd., gdy WebApi zwraca dane metodą o argumencie ID user
             foreach(var game in games)
             {
-                if(game.User_ID == "1")
+                if(game.User_ID == App.myId)
                 {
                    // Bufor.Add(game);
                     busyTitles.Add(game.UserTitle);
@@ -120,23 +120,13 @@ namespace GameCollector
                 Img = selectedGame.Img,
                 BackgroundImg = selectedGame.BackgroundImg,
                 Rate = 5,
-                User_ID = "1",
+                User_ID = App.myId,
                 List = chosenList
             };
 
             bool responseGame = await apiServices.AddGame(userGame);
 
             var games = await apiServices.GetMyGame();
-           /* foreach (var game in games)
-            {
-                //Modyfikacja User_ID
-                if (game.User_ID == "1" && game.UserTitle == userGame.UserTitle)
-                {
-                    id = game.ID;
-                    break;
-                }
-                    
-            }*/
             id = (int)games.LastOrDefault().ID;
 
             Bufor = new UserDlc();

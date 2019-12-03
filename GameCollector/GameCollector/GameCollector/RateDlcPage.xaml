@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GameCollector.RateDlcPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical" Margin="10">
+                <Label Text="Rate the Dlc"
+                       HorizontalTextAlignment="Center" FontSize="Large"/>
+                <Button Text="5/5" 
+                        ClassId="5"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#007000"
+                        CornerRadius="10"
+                        Clicked="RateButton_Clicked"/>
+                <Button Text="4/5" 
+                        ClassId="4"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#81E032"
+                        CornerRadius="10"
+                        Clicked="RateButton_Clicked"/>
+                <Button Text="3/5" 
+                        ClassId="3"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#FFBF00"
+                        CornerRadius="10"
+                        Clicked="RateButton_Clicked"/>
+                <Button Text="2/5" 
+                        ClassId="2"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#FB7422"
+                        CornerRadius="10"
+                        Clicked="RateButton_Clicked"/>
+                <Button Text="1/5" 
+                        ClassId="1"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#D2222D"
+                        CornerRadius="10"
+                        Clicked="RateButton_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
