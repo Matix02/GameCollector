@@ -6,10 +6,6 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="GameCollector.SearchPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save"/>
-    </ContentPage.ToolbarItems>
-    
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="mainSearchBar" 
@@ -33,21 +29,21 @@
                                                             Source = "{Binding Img}"
                                                             CacheType="All"
                                     Grid.Column="0"/>
-                                <Grid Grid.Column="1" RowSpacing="0">
+                                <Grid Grid.Column="1" RowSpacing="5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Button 
-                                        ClassId="History"
-                                        Text="History" Grid.Row="0" Clicked="AddButton_Clicked"/>
+                                        ClassId="Future"
+                                        Text="Want" Grid.Row="0" Clicked="AddButton_Clicked"/>
                                     <Button
                                         ClassId="Current"
-                                        Text="Now" Grid.Row="1" Clicked="AddButton_Clicked"/>
+                                        Text="Playing" Grid.Row="1" Clicked="AddButton_Clicked"/>
                                     <Button 
-                                        ClassId="Future" 
-                                        Text="Future" Grid.Row="2" Clicked="AddButton_Clicked"/>
+                                        ClassId="History" 
+                                        Text="Played" Grid.Row="2" Clicked="AddButton_Clicked"/>
                                 </Grid>
                             </Grid>
                             </StackLayout>

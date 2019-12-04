@@ -7,8 +7,12 @@
              x:Class="GameCollector.App">
     <Application.Resources>
         <Color x:Key="blueColor">#1E90FF</Color>
-
-
-
+        <!-- ButtonColor-->
+        <Color x:Key="blueColor2">#1E90FF</Color>
+        <Color x:Key="whiteColor">#FFFFFF</Color>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource blueColor2}"/>
+            <Setter Property="TextColor" Value="{StaticResource whiteColor}"/>
+        </Style>
     </Application.Resources>
 </Application>

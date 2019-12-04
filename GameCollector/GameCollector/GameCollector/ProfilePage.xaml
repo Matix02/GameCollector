@@ -38,7 +38,7 @@
                            HorizontalOptions="Fill">
                     <FlexLayout  x:Name="asd"
                         Direction="Column">
-                        <Label Text="Played:" HorizontalTextAlignment="Center"/>
+                        <Label Text="Want:" HorizontalTextAlignment="Center"/>
                         <Label x:Name="lPlayed"
                              HorizontalTextAlignment="Center"
                                TextColor="#2196F3"/>
@@ -55,7 +55,7 @@
                 <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="2" CornerRadius="15">
                     <FlexLayout Direction="Column">
-                        <Label Text="Will Play:" HorizontalTextAlignment="Center"/>
+                        <Label Text="Played:" HorizontalTextAlignment="Center"/>
                         <Label x:Name="lToPlay"
                              HorizontalTextAlignment="Center" 
                                TextColor="#2196F3"/>

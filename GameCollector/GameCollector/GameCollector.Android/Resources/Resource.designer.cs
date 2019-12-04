@@ -5834,13 +5834,55 @@ namespace GameCollector.Droid
 			public const int now = 2131165309;
 			
 			// aapt resource value: 0x7F07007E
-			public const int tooltip_frame_dark = 2131165310;
+			public const int playedOnCarbon = 2131165310;
 			
 			// aapt resource value: 0x7F07007F
-			public const int tooltip_frame_light = 2131165311;
+			public const int playedOnHeist = 2131165311;
 			
 			// aapt resource value: 0x7F070080
-			public const int user = 2131165312;
+			public const int playingOnCarbon = 2131165312;
+			
+			// aapt resource value: 0x7F070081
+			public const int playingOnHeist = 2131165313;
+			
+			// aapt resource value: 0x7F070082
+			public const int prof = 2131165314;
+			
+			// aapt resource value: 0x7F070083
+			public const int search = 2131165315;
+			
+			// aapt resource value: 0x7F070084
+			public const int tooltip_frame_dark = 2131165316;
+			
+			// aapt resource value: 0x7F070085
+			public const int tooltip_frame_light = 2131165317;
+			
+			// aapt resource value: 0x7F070086
+			public const int trash = 2131165318;
+			
+			// aapt resource value: 0x7F070087
+			public const int user = 2131165319;
+			
+			// aapt resource value: 0x7F070088
+			public const int wantOff = 2131165320;
+			
+			// aapt resource value: 0x7F070089
+			public const int wantOffAlter = 2131165321;
+			
+			// aapt resource value: 0x7F07008A
+			public const int wantOn = 2131165322;
+			
+			// aapt resource value: 0x7F07008B
+			public const int wantOnAlter = 2131165323;
+			
+			// aapt resource value: 0x7F07008C
+			public const int wantOnCarbon = 2131165324;
+			
+			// aapt resource value: 0x7F07008D
+			public const int wantOnHeist = 2131165325;
+			
+			// aapt resource value: 0x7F07008E
+			public const int wantOnMore = 2131165326;
 			
 			static Drawable()
 			{

@@ -44,7 +44,12 @@ namespace GameCollector
               base.OnAppearing();
               string nameGame = selectedGame.UserTitle;
               ApiServices apiServices = new ApiServices();
-              var games = await apiServices.InfoGame(nameGame);
+            var games = await apiServices.InfoGame(nameGame);
+            switch(nameGame)
+
+            imgBtnWant.Source = "wantOnHeist.png";
+            imgBtnPlaying.Source = "playingOnHeist.png";
+            imgBtnPlayed.Source = "playedOnHeist.png";
              
             foreach(var game in games)
             {
@@ -80,7 +85,7 @@ namespace GameCollector
             }
             else
             {
-                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
+                await DisplayAlert("Hi", "Your game has been deleted successfully", "Alright");
             }
         }
 

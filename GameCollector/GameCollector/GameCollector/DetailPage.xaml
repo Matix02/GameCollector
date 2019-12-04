@@ -6,7 +6,9 @@
              mc:Ignorable="d"
              x:Class="GameCollector.DetailPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Text="Delete" 
+                     IconImageSource="trash.png"
+                     Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
@@ -81,23 +83,35 @@
                            Grid.Column="0" CornerRadius="15"
                            HorizontalOptions="Fill">
                     <!-- Zmiana list w której gra ma się znajdować poprzez ImageButton-->
-                        <FlexLayout Direction="Column" >
-                            <Label Text="Played" HorizontalTextAlignment="Center"/>
-                            <ImageButton Source=""/>
+                        <FlexLayout Direction="Column">
+                           <!-- <Label Text="Played" HorizontalTextAlignment="Center"
+                                   Margin="10"/>-->
+
+                            <ImageButton x:Name="imgBtnWant"
+                                         
+                                         HorizontalOptions="Center"
+                                         BackgroundColor="White"
+                                         />
                         </FlexLayout>
                     </Frame>
                     <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="1" CornerRadius="15">
                         <FlexLayout Direction="Column">
-                            <Label Text="Playing:" HorizontalTextAlignment="Center"/>
-                            <ImageButton Source=""/>
+                            <!--<Label Text="Playing:" HorizontalTextAlignment="Center"/> -->
+                            <ImageButton x:Name="imgBtnPlaying"
+                                         HorizontalOptions="Center"
+                                         BackgroundColor="White"
+                                         />
                         </FlexLayout>
                     </Frame>
                     <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="2" CornerRadius="15">
                         <FlexLayout Direction="Column">
-                            <Label Text="Will Play" HorizontalTextAlignment="Center"/>
-                            <ImageButton Source=""/>
+                            <!-- <Label Text="Want:" HorizontalTextAlignment="Center"/> -->
+                            <ImageButton x:Name="imgBtnPlayed"
+                                         BackgroundColor="White"
+                                   HorizontalOptions="Center"
+                                   />
                         </FlexLayout>
                     </Frame>
                 </Grid>

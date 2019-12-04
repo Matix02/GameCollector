@@ -5,9 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:local="clr-namespace:GameCollector"
             mc:Ignorable="d"
-             x:Class="GameCollector.HomePage">
+             x:Class="GameCollector.HomePage"
+            NavigationPage.HasBackButton="False">
+
     <TabbedPage.ToolbarItems>
-        <ToolbarItem IconImageSource="add.png"
+        
+        <ToolbarItem IconImageSource="search.png"
                      Clicked="ToolbarItem_Clicked"/>
         <ToolbarItem 
                      Clicked="ToolbarItem_Clicked_1" 

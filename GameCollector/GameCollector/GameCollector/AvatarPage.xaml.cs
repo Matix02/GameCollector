@@ -52,7 +52,7 @@ namespace GameCollector
             }
             else
             {
-                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
+                await DisplayAlert("Hi", "Your avatar has been changed successfully", "Alright");
             }
         }
     }

@@ -17,6 +17,8 @@ namespace GameCollector
         // public ObservableCollection<UserGame> MyGames;
         //Zmiana w przypadku Observable na IList, i miejsca inicjalizacji, w ten sposób nie powiela się, ale czy to dobrze?!
         public IList<UserGame> MyGames = new List<UserGame>();
+        int check = 0;
+        UserGame selectedGame;
         public HistoryPage()
         {
             InitializeComponent();
@@ -29,16 +31,31 @@ namespace GameCollector
             var games = await apiServices.GetMyGame();
             foreach (var game in games)
             {
-                if (game.User_ID == App.myId && game.List.Trim() == "History")
+                if (game.User_ID == App.myId && game.List.Trim() == "Future")
                     MyGames.Add(game);
             }
             myGameLv.ItemsSource = MyGames;
         }
 
-        private void GameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void GameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedGame = myGameLv.SelectedItem as UserGame;
-            Navigation.PushAsync(new DetailPage(selectedGame));
+            if (check == 0)
+            {
+                check = 1;
+                selectedGame = myGameLv.SelectedItem as UserGame;
+                // var selectedGame = myGameLv.SelectedItem as UserGame;
+                myGameLv.SelectedItem = null;
+
+                // await Navigation.PushAsync(new DetailPage(selectedGame));
+
+            }
+            else
+            {
+                // var selectedGame = myGameLv.SelectedItem as UserGame;
+                // myGameLv.SelectedItem = null;
+                await Navigation.PushAsync(new DetailPage(selectedGame));
+                check = 0;
+            }
         }
     }
 }

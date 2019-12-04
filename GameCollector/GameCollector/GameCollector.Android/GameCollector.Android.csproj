@@ -167,5 +167,38 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\kick.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\prof.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wantOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wantOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wantOffAlter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wantOnAlter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wantOnMore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\playedOnCarbon.png" />
+    <AndroidResource Include="Resources\drawable\playingOnCarbon.png" />
+    <AndroidResource Include="Resources\drawable\wantOnCarbon.png" />
+    <AndroidResource Include="Resources\drawable\playedOnHeist.png" />
+    <AndroidResource Include="Resources\drawable\playingOnHeist.png" />
+    <AndroidResource Include="Resources\drawable\wantOnHeist.png" />
+    <Content Include="wantOnCarbon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
