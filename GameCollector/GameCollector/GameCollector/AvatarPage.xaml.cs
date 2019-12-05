@@ -1,5 +1,5 @@
 ﻿using GameCollector.Model;
-using GameCollector.Services;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,45 +14,39 @@ namespace GameCollector
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AvatarPage : ContentPage
     {
-        public IList<Avatar> Avatars = new List<Avatar>();
         public AvatarPage()
         {
             InitializeComponent();
-
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            ApiServices apiServices = new ApiServices();
-            var imgAvatars = await apiServices.GetAvatar();
-            
-            foreach (var avatar in imgAvatars)
-            {
-                    Avatars.Add(avatar);
-            }
-            avatarLv.ItemsSource = Avatars;
+            var imgAvatars = await Avatar.GetAvatar();
+            avatarLv.ItemsSource = imgAvatars;
         }
-
-        private async void avatarLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void AvatarLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedAv = avatarLv.SelectedItem as Avatar;
-
-            User userAv = new User()
+            try
             {
-                Avatar = selectedAv.Img
-            };
+                var selectedAv = avatarLv.SelectedItem as Avatar;
+                User userAv = new User()
+                {
+                    Avatar = selectedAv.Img
+                };
+                await Avatar.EditAvatar(App.myId, userAv);
+                await DisplayAlert("Hi", "Your avatar has been changed successfully", "Alright");
 
-            ApiServices apiServices = new ApiServices();
-            bool response = await apiServices.EditAvatar(App.myId, userAv);
-
-            if (response != true)
+            }
+            catch (NullReferenceException)
             {
                 await DisplayAlert("Oops", "Something goes wrong", "Alright");
+
             }
-            else
+            catch (Exception)
             {
-                await DisplayAlert("Hi", "Your avatar has been changed successfully", "Alright");
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+
             }
         }
     }

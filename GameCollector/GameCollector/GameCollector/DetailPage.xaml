@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:touch="clr-namespace:TouchEffect;assembly=TouchEffect"
              mc:Ignorable="d"
              x:Class="GameCollector.DetailPage">
     <ContentPage.ToolbarItems>
@@ -88,9 +89,9 @@
                                    Margin="10"/>-->
 
                             <ImageButton x:Name="imgBtnWant"
-                                         
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
+                                         Aspect="Fill" 
                                          />
                         </FlexLayout>
                     </Frame>
@@ -98,20 +99,30 @@
                        Grid.Column="1" CornerRadius="15">
                         <FlexLayout Direction="Column">
                             <!--<Label Text="Playing:" HorizontalTextAlignment="Center"/> -->
+                            
+                                
+                            
                             <ImageButton x:Name="imgBtnPlaying"
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
-                                         />
+                                       Aspect="Fill"  />
+                           
                         </FlexLayout>
                     </Frame>
                     <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="2" CornerRadius="15">
                         <FlexLayout Direction="Column">
                             <!-- <Label Text="Want:" HorizontalTextAlignment="Center"/> -->
-                            <ImageButton x:Name="imgBtnPlayed"
+                            <!--ImageButton x:Name="imgBtnPlayed"
                                          BackgroundColor="White"
                                    HorizontalOptions="Center"
-                                   />
+                                         Aspect="Fill"/> -->
+                            <touch:TouchImage
+                                x:Name="imgBtnPlayed"
+                                HorizontalOptions="Center"
+                                BackgroundColor="White" 
+                                IsEnabled="False"
+                                touch:TouchEff.Command="{Binding Command}"/>
                         </FlexLayout>
                     </Frame>
                 </Grid>

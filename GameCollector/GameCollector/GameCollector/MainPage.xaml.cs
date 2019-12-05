@@ -1,5 +1,4 @@
 ﻿using GameCollector.Model;
-using GameCollector.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,41 +25,15 @@ namespace GameCollector
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
-            bool isPasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
-            
-            if (isEmailEmpty || isPasswordEmpty)
-            {
-
-            }
+            bool canLogin = await User.Login(emailEntry.Text, passwordEntry.Text);
+            if (canLogin)
+                await Navigation.PushAsync(new HomePage());
             else
-            {
-                ApiServices apiServices = new ApiServices();
-                var games = await apiServices.GetEveryone();
-                foreach (var game in games)
-                {
-                    if(game.Email == emailEntry.Text)
-                    {
-                        if(game.Password == passwordEntry.Text)
-                        {
-                            App.myId = game.ID;
-                            await Navigation.PushAsync(new HomePage());
-                            break;
-                        }
-                        else
-                        {
-                            await DisplayAlert("Error", "Email or password are incorrect", "Ok");
-                            break;
-                        }
-                    }
-                }
-            }
+                await DisplayAlert("Error", "Something goes wrong. Try again", "Ok");
         }
 
-        private void registerLoginButton_Clicked(object sender, EventArgs e)
+        private void RegisterLoginButton_Clicked(object sender, EventArgs e)
         {
-            
-
             Navigation.PushAsync(new RegisterPage());
         }
     }

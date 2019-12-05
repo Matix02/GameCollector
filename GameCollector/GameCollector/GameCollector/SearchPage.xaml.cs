@@ -1,6 +1,5 @@
 ﻿using GameCollector.Logic;
 using GameCollector.Model;
-using GameCollector.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,42 +50,26 @@ namespace GameCollector
             }
             else
             {
-                ApiServices apiServices = new ApiServices();
-                var games = await apiServices.SearchGame();
-
-                foreach (var game in games)
-                {
-                    if(!titles.Contains(game.Title) && !busyTitles.Contains(game.Title))
-                    {
-                        titles.Add(game.Title);
-                        MyGames.Add(game);
-                    }  
-                }
-                
-                gameListView.ItemsSource = MyGames.Where(x => x.Title.ToLower().Contains(filter.ToLower())).Distinct();
+                var games = await Game.SearchGame(titles, busyTitles, filter);
+                gameListView.ItemsSource = games;
                 MyGames.Clear();
                 titles.Clear();
             }
             gameListView.EndRefresh();      
         }
         protected async override void OnAppearing()
-        {
+        {   
             base.OnAppearing();
-            ApiServices apiServices = new ApiServices();
-            var games = await apiServices.GetMyGame();
-  //////sprawdzić jaka czy jest różnica jeśli chodzi o pręd., gdy WebApi zwraca dane metodą o argumencie ID user
+            var games = await UserGame.GetMyGame();
             foreach(var game in games)
             {
                 if(game.User_ID == App.myId)
                 {
-                   // Bufor.Add(game);
                     busyTitles.Add(game.UserTitle);
                 }    
             }
         }
-
-        //NoItemSelected
-        private void gameListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void GameListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var list = (ListView)sender;
             list.SelectedItem = null;
@@ -96,60 +79,53 @@ namespace GameCollector
         {
             int id;
             string chosenList;
-            
-            var button = (Button)sender;
-            var classID = button.ClassId;
-            var list = (Game)((Button)sender).BindingContext;
-            var selectedGame = list;
-            
-
-            ApiServices apiServices = new ApiServices();
-
-            if (classID.Equals("History"))
-                chosenList = "History";
-            else if (classID.Equals("Future"))
-                chosenList = "Future";
-            else
-                chosenList = "Current";
-                
-                //1. Pomsysł dodania kilku dlc przy pomocy pętli, gdzie wysyłamy te dlc do jednego Id kilkukrotnie
-                //2. Prób spakowania, prześledzenia tego jak się "rozpakowuje" json, bo przecież zwraca kilka/nascie elemn.
-            UserGame userGame = new UserGame()
+            try
             {
-                UserTitle = selectedGame.Title,
-                Img = selectedGame.Img,
-                BackgroundImg = selectedGame.BackgroundImg,
-                Rate = 5,
-                User_ID = App.myId,
-                List = chosenList
-            };
+                var button = (Button)sender;
+                var classID = button.ClassId;
+                var list = (Game)((Button)sender).BindingContext;
+                var selectedGame = list;
 
-            bool responseGame = await apiServices.AddGame(userGame);
+                if (classID.Equals("History"))
+                    chosenList = "History";
+                else if (classID.Equals("Future"))
+                    chosenList = "Future";
+                else
+                    chosenList = "Current";
 
-            var games = await apiServices.GetMyGame();
-            id = (int)games.LastOrDefault().ID;
-
-            Bufor = new UserDlc();
-            foreach (var dlc in selectedGame.Dlcs)
-            {
-                UserDlc dodatki = new UserDlc()
+                UserGame userGame = new UserGame()
                 {
-                    DlcTitle = dlc.DlcTitle,
-                    Img = dlc.Img,
+                    UserTitle = selectedGame.Title,
+                    Img = selectedGame.Img,
+                    BackgroundImg = selectedGame.BackgroundImg,
                     Rate = 5,
-                    Game_ID = id
+                    User_ID = App.myId,
+                    List = chosenList
                 };
-                Bufor = dodatki;
-                bool responseDlc = await apiServices.AddDlc(Bufor);
+                await UserGame.AddGame(userGame);
+                var games = await UserGame.GetMyGame();
+                id = games.LastOrDefault().ID;
+                foreach (var dlc in selectedGame.Dlcs)
+                {
+                    UserDlc dodatki = new UserDlc()
+                    {
+                        DlcTitle = dlc.DlcTitle,
+                        Img = dlc.Img,
+                        Rate = 5,
+                        Game_ID = id
+                    };
+                    Bufor = dodatki;
+                    await UserDlc.AddDlc(Bufor);
+                }
+                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
             }
-
-            if (responseGame!=true)
+            catch(NullReferenceException)
             {
                 await DisplayAlert("Oops", "Something goes wrong", "Alright");
             }
-            else
+            catch(Exception)
             {
-                await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
             }
         }
     }

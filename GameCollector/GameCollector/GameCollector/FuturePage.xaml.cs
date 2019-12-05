@@ -1,5 +1,5 @@
 ﻿using GameCollector.Model;
-using GameCollector.Services;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +22,11 @@ namespace GameCollector
         public FuturePage()
         {
             InitializeComponent();
-            //  MyGames = new ObservableCollection<UserGame>();
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            ApiServices apiServices = new ApiServices();
-            var games = await apiServices.GetMyGame();
+            var games = await UserGame.GetMyGame();
             foreach (var game in games)
             {
                 if (game.User_ID == App.myId && game.List.Trim() == "History")
@@ -43,16 +41,10 @@ namespace GameCollector
             {
                 check = 1;
                 selectedGame = myGameLv.SelectedItem as UserGame;
-                // var selectedGame = myGameLv.SelectedItem as UserGame;
                 myGameLv.SelectedItem = null;
-
-                // await Navigation.PushAsync(new DetailPage(selectedGame));
-
             }
             else
             {
-                // var selectedGame = myGameLv.SelectedItem as UserGame;
-                // myGameLv.SelectedItem = null;
                 await Navigation.PushAsync(new DetailPage(selectedGame));
                 check = 0;
             }

@@ -26,7 +26,7 @@
                 TextColor="White"/>
         <Button x:Name="registerLoginButton" 
                 Text="Register"
-                Clicked="registerLoginButton_Clicked"
+                Clicked="RegisterLoginButton_Clicked"
                 BackgroundColor="DodgerBlue"
                 TextColor="White"
                 HorizontalOptions="End"/>

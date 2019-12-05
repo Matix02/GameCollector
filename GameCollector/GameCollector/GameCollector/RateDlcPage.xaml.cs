@@ -1,5 +1,4 @@
 ﻿using GameCollector.Model;
-using GameCollector.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +13,11 @@ namespace GameCollector
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RateDlcPage : ContentPage
     {
-        readonly UserGame userGame;
-        public RateDlcPage(UserGame userGame)
+      //  readonly UserGame userGame;
+        public RateDlcPage(/*UserGame userGame*/)
         {
             InitializeComponent();
-            this.userGame = userGame;
+           // this.userGame = userGame;
         }
 /////////////////Korekta wyjdzie, gdy uda się zaimplementować MVVM pattern
         private void RateButton_Clicked(object sender, EventArgs e)

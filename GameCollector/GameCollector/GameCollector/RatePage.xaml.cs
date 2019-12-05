@@ -1,5 +1,4 @@
 ﻿using GameCollector.Model;
-using GameCollector.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,17 +22,26 @@ namespace GameCollector
 
         private async void RateButton_Clicked(object sender, EventArgs e)
         {
-            var userGameId = userGame.ID;
-            var button = (Button)sender;
-            int clkNb = System.Convert.ToInt32(button.ClassId);
-
-            UserGame userRate = new UserGame()
+            try
             {
-                Rate = clkNb
-            };
+                var userGameId = userGame.ID;
+                var button = (Button)sender;
+                int clkNb = System.Convert.ToInt32(button.ClassId);
 
-            ApiServices apiServices = new ApiServices();
-            bool response = await apiServices.EditGameRate(userGameId, userRate);
+                UserGame userRate = new UserGame()
+                {
+                    Rate = clkNb
+                };
+                await UserGame.EditGameRate(userGameId, userRate);
+            }
+            catch (NullReferenceException)
+            {
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+            }
         }
     }
 }

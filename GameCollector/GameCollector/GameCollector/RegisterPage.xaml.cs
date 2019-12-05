@@ -1,5 +1,4 @@
 ﻿using GameCollector.Model;
-using GameCollector.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +18,10 @@ namespace GameCollector
             InitializeComponent();
         }
 
-        private async void registerButton_Clicked(object sender, EventArgs e)
+        private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
             if(passwordEntry.Text == confirmPasswordEntry.Text)
             {
-                ApiServices apiServices = new ApiServices();
                 User user = new User()
                 {
                     //Zmienić z bazy danych String na Int przy ID User
@@ -32,7 +30,7 @@ namespace GameCollector
                     Password = passwordEntry.Text,
                     Type = "user"
                 };
-                bool response = await apiServices.RegisterUser(user);
+                bool response = await User.RegisterUser(user);
 
                 if(response)
                     await DisplayAlert("Hi", "Your game has been added successfully", "Alright");

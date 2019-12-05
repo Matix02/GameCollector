@@ -13,7 +13,7 @@
                        PlaceholderColor="{StaticResource blueColor}"/>
             <!-- Mozliwość, że cześć stacklayout, jak i podwłaściwości row.... itd. nie jest potrzebna,
             zneutralizować niepotrzebne elementy--> <!-- -->
-            <ListView x:Name="gameListView" RowHeight="150"  ItemSelected="gameListView_ItemSelected">
+            <ListView x:Name="gameListView" RowHeight="150"  ItemSelected="GameListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >

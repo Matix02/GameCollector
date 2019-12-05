@@ -1,6 +1,5 @@
 ﻿using GameCollector.Logic;
 using GameCollector.Model;
-using GameCollector.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +24,7 @@ namespace GameCollector
             //dodać zabezpiecznie, że jak nie ma internetu to nie wchodzi się do części bazy "Game" poprzez if
             InitializeComponent();
             this.selectedGame = selectedGame;
-
+            imgBtnPlayed.BackgroundColor = Color.White;
          //BindingContext to Controls
             btnMainRate.Text = selectedGame.Rate.ToString();
             imgBG.Source = selectedGame.BackgroundImg;
@@ -41,15 +40,29 @@ namespace GameCollector
         }
         protected async override void OnAppearing()
          {
-              base.OnAppearing();
-              string nameGame = selectedGame.UserTitle;
-              ApiServices apiServices = new ApiServices();
-            var games = await apiServices.InfoGame(nameGame);
-            switch(nameGame)
+            base.OnAppearing();
+            string nameGame = selectedGame.UserTitle;
+            string nameList = selectedGame.List;
+            var games = await Game.InfoGame(nameGame);
 
-            imgBtnWant.Source = "wantOnHeist.png";
-            imgBtnPlaying.Source = "playingOnHeist.png";
-            imgBtnPlayed.Source = "playedOnHeist.png";
+            switch (nameList.Trim()) {
+                case "History":
+                    imgBtnWant.Source = "wantOffHeist.png";
+                    imgBtnPlaying.Source = "playingOffHeist.png";
+                    imgBtnPlayed.Source = "playedOnHeist.png";
+                    break;
+                case "Future":
+                    imgBtnWant.Source = "wantOnHeist.png";
+                    imgBtnPlaying.Source = "playingOffHeist.png";
+                    imgBtnPlayed.Source = "playedOffHeist.png";
+                    break;
+                case "Current":
+                    imgBtnWant.Source = "wantOffHeist.png";
+                    imgBtnPlaying.Source = "playingOnHeist.png";
+                    imgBtnPlayed.Source = "playedOffHeist.png";
+                    break;
+            }
+
              
             foreach(var game in games)
             {
@@ -72,12 +85,11 @@ namespace GameCollector
         private async void  ToolbarItem_Clicked(object sender, EventArgs e)
         {
             //Utworzyć funkcję, do tych pętl, bo powtarzany jest KOD !!!!
-            ApiServices apiServices = new ApiServices();
             foreach (var submenu in selectedGame.UserDlcs)
             {
-                bool responseDlc = await apiServices.DeleteDlc(submenu.ID);
+                bool responseDlc = await UserDlc.DeleteDlc(submenu.ID);
             }
-            bool responseGame = await apiServices.DeleteGame(selectedGame.ID);
+            bool responseGame = await UserGame.DeleteGame(selectedGame.ID);
             
             if (!responseGame == true)
             {
@@ -92,13 +104,13 @@ namespace GameCollector
         private void Button_Clicked(object sender, EventArgs e)
         {
             var selectedTitle = selectedGame as UserGame;
-            Navigation.PushAsync(new RatePage(selectedGame));
+            Navigation.PushAsync(new RatePage(selectedTitle));
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            var selectedTitle = selectedGame.UserDlcs as UserDlc;
-            Navigation.PushAsync(new RateDlcPage(selectedGame));
+            //var selectedTitle = selectedGame.UserDlcs as UserDlc;
+            //Navigation.PushAsync(new RateDlcPage(selectedTitle));
         }
     }
 }
