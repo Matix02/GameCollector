@@ -25,7 +25,7 @@ namespace GameCollector
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var avatars = await User.GetUser("1");
+            var avatars = await User.GetUser(App.myId);
             int played = 0;
             int playing = 0;
             int want = 0;

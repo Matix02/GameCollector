@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using GameCollector.Logic;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -26,6 +28,21 @@ namespace GameCollector.Model
             {
                 var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/api/Users");
                 return JsonConvert.DeserializeObject<List<UserGame>>(response);
+            }
+        }
+        public static async Task<IEnumerable<UserGame>> GetMyGameFromList(string list)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                ObservableCollection<UserGame> MyGames = new ObservableCollection<UserGame>();
+                var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/api/Users");
+                var games = JsonConvert.DeserializeObject<List<UserGame>>(response);
+                foreach (var game in games)
+                {
+                    if (game.User_ID == App.myId && game.List.Trim() == list)
+                        MyGames.Add(game);
+                }
+                return MyGames;
             }
         }
         public static async Task<bool> AddGame(UserGame userGame)

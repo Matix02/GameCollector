@@ -14,7 +14,7 @@ namespace GameCollector
     public partial class HistoryPage : ContentPage
     {
         //Zmiana w przypadku Observable na IList, i miejsca inicjalizacji, w ten sposób nie powiela się, ale czy to dobrze?!
-        public IList<UserGame> MyGames = new List<UserGame>();
+       // public IList<UserGame> MyGames = new List<UserGame>();
         int check = 0;
         UserGame selectedGame;
         public HistoryPage()
@@ -24,13 +24,9 @@ namespace GameCollector
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var games = await UserGame.GetMyGame();
-            foreach (var game in games)
-            {
-                if (game.User_ID == App.myId && game.List.Trim() == "Future")
-                    MyGames.Add(game);
-            }
-            myGameLv.ItemsSource = MyGames;
+            string list = "Future";
+            var games = await UserGame.GetMyGameFromList(list);
+            myGameLv.ItemsSource = games;
         }
 
         private async void GameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

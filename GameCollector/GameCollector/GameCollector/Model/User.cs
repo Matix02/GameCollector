@@ -18,7 +18,7 @@ namespace GameCollector.Model
         public string Type { get; set; }
         public string Avatar { get; set; }
 
-        public static async Task<List<User>> GetUser(string id)
+        public static async Task<List<User>> GetUser(int id)
         {
             using (HttpClient client = new HttpClient())
             {

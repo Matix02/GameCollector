@@ -16,23 +16,32 @@ namespace GameCollector
     {
         // public ObservableCollection<UserGame> MyGames;
         //Zmiana w przypadku Observable na IList, i miejsca inicjalizacji, w ten sposób nie powiela się, ale czy to dobrze?!
-        public IList<UserGame> MyGames = new List<UserGame>();
+       // public IList<UserGame> MyGames = new List<UserGame>();
         int check = 0;
         UserGame selectedGame;
         public FuturePage()
         {
             InitializeComponent();
+            
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var games = await UserGame.GetMyGame();
-            foreach (var game in games)
-            {
-                if (game.User_ID == App.myId && game.List.Trim() == "History")
-                    MyGames.Add(game);
-            }
-            myGameLv.ItemsSource = MyGames;
+            string list = "History";
+            var games = await UserGame.GetMyGameFromList(list);
+            
+            /*  foreach (var game in games)
+              {
+                  if (game.User_ID == App.myId && game.List.Trim() == "History")
+                      MyGames.Add(game);
+              }*/
+
+            await myGameLv.FadeTo(0, 500);
+            myGameLv.ItemsSource = games;
+            await myGameLv.FadeTo(1, 1000);
+            
+            
+
         }
 
         private async void GameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -42,6 +51,7 @@ namespace GameCollector
                 check = 1;
                 selectedGame = myGameLv.SelectedItem as UserGame;
                 myGameLv.SelectedItem = null;
+                
             }
             else
             {

@@ -20,7 +20,9 @@
             <CollectionView.ItemTemplate >
                 <DataTemplate>
                     <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
-                        <ffimageloading:CachedImage Aspect="AspectFit"
+                        <ffimageloading:CachedImage 
+                            x:Name="imgFF"
+                            Aspect="AspectFit"
 			                DownsampleToViewSize="true"
                             Source = "{Binding Img}"
                             CacheType="All"/>

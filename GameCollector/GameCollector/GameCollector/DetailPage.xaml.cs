@@ -43,7 +43,6 @@ namespace GameCollector
             base.OnAppearing();
             string nameGame = selectedGame.UserTitle;
             string nameList = selectedGame.List;
-            var games = await Game.InfoGame(nameGame);
 
             switch (nameList.Trim()) {
                 case "History":
@@ -63,7 +62,7 @@ namespace GameCollector
                     break;
             }
 
-             
+            var games = await Game.InfoGame(nameGame);
             foreach(var game in games)
             {
                 if (game.Platform.PlatformName.Equals("Pc"))
