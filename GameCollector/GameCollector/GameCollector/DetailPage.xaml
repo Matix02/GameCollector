@@ -12,6 +12,7 @@
                      Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        
         <ScrollView>
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
@@ -87,25 +88,39 @@
                         <FlexLayout Direction="Column">
                            <!-- <Label Text="Played" HorizontalTextAlignment="Center"
                                    Margin="10"/>-->
+                            <touch:TouchImage
+                                x:Name="imgBtnWant"
+                                HorizontalOptions="Center"
+                                BackgroundColor="White" 
+                                IsEnabled="False"
+                                
+                                >
+                                
+                            </touch:TouchImage>
 
-                            <ImageButton x:Name="imgBtnWant"
+                            <!-- <ImageButton x:Name="imgBtnWant"
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
                                          Aspect="Fill" 
-                                         />
+                                         /> -->
                         </FlexLayout>
                     </Frame>
                     <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="1" CornerRadius="15">
                         <FlexLayout Direction="Column">
                             <!--<Label Text="Playing:" HorizontalTextAlignment="Center"/> -->
-                            
+
+                            <touch:TouchImage
+                                x:Name="imgBtnPlaying"
+                                HorizontalOptions="Center"
+                                BackgroundColor="White" 
                                 
-                            
-                            <ImageButton x:Name="imgBtnPlaying"
+                                touch:TouchEff.Command="{Binding Command}"/>
+
+                            <!-- <ImageButton x:Name="imgBtnPlaying"
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
-                                       Aspect="Fill"  />
+                                       Aspect="Fill"  />-->
                            
                         </FlexLayout>
                     </Frame>
@@ -121,8 +136,7 @@
                                 x:Name="imgBtnPlayed"
                                 HorizontalOptions="Center"
                                 BackgroundColor="White" 
-                                IsEnabled="False"
-                                touch:TouchEff.Command="{Binding Command}"/>
+                                IsEnabled="False"/>
                         </FlexLayout>
                     </Frame>
                 </Grid>
@@ -159,35 +173,7 @@
                                    TextColor="#2196F3"/>
                         </FlexLayout>
                     </Frame>
-               <!--    <Frame WidthRequest="50" HeightRequest="50"
-                       Grid.Column="2" CornerRadius="15">
-                        <FlexLayout Direction="Column">
-                            <Label Text="Publisher:" HorizontalTextAlignment="Center"/>
-                            <Label Text="Gearbox Software" HorizontalTextAlignment="Center" 
-                               TextColor="#2196F3"/>
-                        </FlexLayout>
-                    </Frame>-->
                 </Grid>
-                <!--
-            <Grid Grid.Row="1" Padding="0,90,0,0" Margin="5,30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Column="0">
-                <Label Text="Developer" HorizontalTextAlignment="Center" TextColor="Black"/>
-                <Label Text="2K" HorizontalTextAlignment="Center" TextColor="Blue"/>
-            </StackLayout>
-            <StackLayout Grid.Column="1">
-                <Label Text="Data Premiery:" HorizontalTextAlignment="Center" TextColor="Black"/>
-                <Label Text="14.05.2019" HorizontalTextAlignment="Center" TextColor="Blue"/>
-            </StackLayout>
-            <StackLayout Grid.Column="2">
-                <Label Text="Publisher:" HorizontalTextAlignment="Center" TextColor="Black"/>
-                <Label Text="Gearbox Software" HorizontalTextAlignment="Center" TextColor="Blue"/>
-            </StackLayout>
-        </Grid>-->
                 <!-- Ustawić by w poziomym widoku  obieky był 
         ustawiony na centrum-->
                 <CarouselView x:Name="LvDlcs"

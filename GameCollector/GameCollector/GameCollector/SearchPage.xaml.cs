@@ -29,6 +29,7 @@ namespace GameCollector
             titles = new List<String>();
             busyTitles = new List<String>();
             InitSearchBar();
+
         }
         void InitSearchBar()
         {
@@ -96,12 +97,14 @@ namespace GameCollector
                 UserGame userGame = new UserGame()
                 {
                     UserTitle = selectedGame.Title,
-                    Img = selectedGame.Img,
-                    BackgroundImg = selectedGame.BackgroundImg,
-                    Rate = 5,
-                    User_ID = App.myId,
-                    List = chosenList
-                };
+                Img = selectedGame.Img,
+                BackgroundImg = selectedGame.BackgroundImg,
+                Rate = 5,
+                User_ID = App.myId,
+                List = chosenList
+            };
+
+                
                 await UserGame.AddGame(userGame);
                 var games = await UserGame.GetMyGame();
                 id = games.LastOrDefault().ID;

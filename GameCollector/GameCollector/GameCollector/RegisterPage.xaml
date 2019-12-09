@@ -5,23 +5,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="GameCollector.RegisterPage">
-    <StackLayout VerticalOptions="Center"
+    <StackLayout x:Name="containerStackLayout"
+        VerticalOptions="Center"
                  Margin="20">
-        <Entry Text="a"
+        <Entry Text="{Binding Nickname, Mode=TwoWay}"
             x:Name="nickEntry" 
                Placeholder="Nickname"
                TextColor="{StaticResource blueColor}"/>
-        <Entry Text="b"
+        <Entry Text="{Binding Email, Mode=TwoWay}"
             x:Name="emailEntry" 
                Placeholder="Email address"
                TextColor="{StaticResource blueColor}"
                Keyboard="Email"/>
-        <Entry Text="a"
+        <Entry Text="{Binding Password, Mode=TwoWay}"
             x:Name="passwordEntry" 
                IsPassword="True"
                Placeholder="Password"
                TextColor="{StaticResource blueColor}"/>
-        <Entry Text="a"
+        <Entry 
             x:Name="confirmPasswordEntry" 
                Placeholder="Confirm Password"
                IsPassword="True"

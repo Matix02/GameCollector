@@ -14,9 +14,12 @@ namespace GameCollector
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AvatarPage : ContentPage
     {
+        User user;
         public AvatarPage()
         {
             InitializeComponent();
+            user = new User();
+            avatarLv.BindingContext = user;
         }
         protected override async void OnAppearing()
         {
@@ -30,13 +33,11 @@ namespace GameCollector
             try
             {
                 var selectedAv = avatarLv.SelectedItem as Avatar;
-                User userAv = new User()
-                {
-                    Avatar = selectedAv.Img
-                };
-                await Avatar.EditAvatar(App.myId, userAv);
-                await DisplayAlert("Hi", "Your avatar has been changed successfully", "Alright");
 
+                user.Avatar = selectedAv.Img;
+
+                await Avatar.EditAvatar(App.myId, user);
+                await DisplayAlert("Hi", "Your avatar has been changed successfully", "Alright");
             }
             catch (NullReferenceException)
             {
@@ -46,7 +47,6 @@ namespace GameCollector
             catch (Exception)
             {
                 await DisplayAlert("Oops", "Something goes wrong", "Alright");
-
             }
         }
     }

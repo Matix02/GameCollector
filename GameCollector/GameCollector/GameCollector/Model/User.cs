@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -8,15 +9,65 @@ using System.Threading.Tasks;
 
 namespace GameCollector.Model
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
+        //Zostawić to na później, zająć się zmianami listy i ikonkami - spróbować zrobić OnPropertyChanged na buttonach
         public IList<object> UserGames { get; set; }
-        public int ID { get; set; }
-        public string Nickname { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Type { get; set; }
-        public string Avatar { get; set; }
+        private int iD;
+
+        public int ID
+        {
+            get { return iD; }
+            set { iD = value; }
+        }
+
+        private string nickname;
+
+        public string Nickname
+        {
+            get { return nickname; }
+            set { nickname = value; }
+        }
+        private string email;
+
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
+        private string type;
+
+        public string Type
+        {
+            get {
+                if (type == null)
+                    return "user";
+                else
+                    return type; }
+            set { type = value; }
+        }
+
+        private string avatar;
+
+        public string Avatar
+        {
+            get { return avatar; }
+            set { avatar = value;
+               // OnPropertyChanged(nameof(Avatar));
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public static async Task<List<User>> GetUser(int id)
         {
@@ -86,5 +137,11 @@ namespace GameCollector.Model
                 return false;
             }
         }
-    }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if(propertyName != null )
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }   
 }

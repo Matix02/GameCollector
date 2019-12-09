@@ -1,13 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameCollector.Model
 {
-    public class UserDlc
+    public class UserDlc : INotifyPropertyChanged
     {
         public int ID { get; set; }
         public string DlcTitle { get; set; }
@@ -15,11 +16,8 @@ namespace GameCollector.Model
         public int Rate { get; set; }
         public int Game_ID { get; set; }
 
-      /*  public static async void InsertUserDlc(UserDlc userDlc)
-        {
-            ApiServices apiServices = new ApiServices();
-            await apiServices.AddDlc(userDlc);
-        }*/
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static async Task<bool> AddDlc(UserDlc userDlcs)
         {
             using (HttpClient client = new HttpClient())
@@ -49,6 +47,10 @@ namespace GameCollector.Model
                     "https://collectorgameapp.azurewebsites.net/api/RateDlc/", id), content);
                 return response.IsSuccessStatusCode;
             }
+        }
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GameCollector.Model
 {
-    public class UserGame
+    public class UserGame : INotifyPropertyChanged
     {
         public User User { get; set; }
         public IList<UserDlc> UserDlcs { get; set; }
@@ -19,8 +20,10 @@ namespace GameCollector.Model
         public int Rate { get; set; }
         public string Img { get; set; }
         public string BackgroundImg { get; set; }
-        public int User_ID { get; set; } 
+        public int User_ID { get; set; }
         public string List { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public static async Task<List<UserGame>> GetMyGame()
         {
@@ -74,6 +77,10 @@ namespace GameCollector.Model
                     "https://collectorgameapp.azurewebsites.net/RateGame/", id), content);
                 return response.IsSuccessStatusCode;
             }
+        }
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

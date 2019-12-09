@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GameCollector.Logic
 {
-    public class Game 
+    public class Game : INotifyPropertyChanged
     {
         public Developer Developer { get; set; }
         public IList<Dodatki> Dlcs { get; set; }
@@ -23,14 +24,8 @@ namespace GameCollector.Logic
         public int Platform_ID { get; set; }
         public int Developer_ID { get; set; }
 
-      /*  public static async Task<List<Game>> SearchGame()
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/api/Games");
-                return JsonConvert.DeserializeObject<List<Game>>(response);
-            }
-        }*/
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static async Task<List<Game>> InfoGame(string name)
         {
             using (HttpClient client = new HttpClient())
@@ -63,26 +58,49 @@ namespace GameCollector.Logic
                 return titlesToShow;
             }
         }
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
-    public class Developer
+    public class Developer : INotifyPropertyChanged
     {
+
         public IList<object> Games { get; set; }
         public int ID { get; set; }
         public string DeveloperName { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Platform
+    public class Platform : INotifyPropertyChanged
     {
         public IList<object> Games { get; set; }
         public int ID { get; set; }
         public string PlatformName { get; set; }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
-    public class Dodatki
+    public class Dodatki : INotifyPropertyChanged
     {
         public int ID { get; set; }
         public string DlcTitle { get; set; }
         public string Img { get; set; }
         public int Game_ID { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

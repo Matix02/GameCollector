@@ -1,4 +1,5 @@
 ﻿using GameCollector.Model;
+using GameCollector.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,10 +16,13 @@ namespace GameCollector
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        //public ObservableCollection<User> MyGames;
+        HomeVM viewModel;
         public MainPage()
         {
             InitializeComponent();
+            viewModel = new HomeVM();
+            BindingContext = viewModel;
+
         }
         /*Dodać funkcję logowania offline, jeśli nie ma internetu przeskakuje na konto, 
         które było ostatnio zalogowane*/
@@ -30,11 +34,6 @@ namespace GameCollector
                 await Navigation.PushAsync(new HomePage());
             else
                 await DisplayAlert("Error", "Something goes wrong. Try again", "Ok");
-        }
-
-        private void RegisterLoginButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RegisterPage());
         }
     }
 }

@@ -1,17 +1,20 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameCollector.Model
 {
-    public class Avatar
+    public class Avatar : INotifyPropertyChanged
     {
         public int ID { get; set; }
         public string AvatarName { get; set; }
         public string Img { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public static async Task<bool> EditAvatar(int id, User user)
         {
@@ -37,6 +40,10 @@ namespace GameCollector.Model
                 }
                 return Avatars;
             }
+        }
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

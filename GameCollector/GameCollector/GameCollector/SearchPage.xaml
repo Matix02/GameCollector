@@ -7,12 +7,12 @@
              mc:Ignorable="d"
              x:Class="GameCollector.SearchPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="containerStackLayout">
             <SearchBar x:Name="mainSearchBar" 
                        Placeholder="Search a Game"
                        PlaceholderColor="{StaticResource blueColor}"/>
             <!-- Mozliwość, że cześć stacklayout, jak i podwłaściwości row.... itd. nie jest potrzebna,
-            zneutralizować niepotrzebne elementy--> <!-- -->
+            zneutralizować niepotrzebne elementy-->
             <ListView x:Name="gameListView" RowHeight="150"  ItemSelected="GameListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -21,103 +21,39 @@
                                 <Grid RowSpacing="0" 
                                   Padding="5">
                                     <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <ffimageloading:CachedImage 
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ffimageloading:CachedImage 
                                                             DownsampleToViewSize="true"
                                                             Source = "{Binding Img}"
                                                             CacheType="All"
                                     Grid.Column="0"/>
-                                <Grid Grid.Column="1" RowSpacing="5">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Button 
+                                    <Grid Grid.Column="1" RowSpacing="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Button 
                                         ClassId="Future"
                                         Text="Want" Grid.Row="0" Clicked="AddButton_Clicked"/>
-                                    <Button
+                                        <Button
                                         ClassId="Current"
                                         Text="Playing" Grid.Row="1" Clicked="AddButton_Clicked"/>
-                                    <Button 
+                                        <Button 
                                         ClassId="History" 
                                         Text="Played" Grid.Row="2" Clicked="AddButton_Clicked"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
                             </StackLayout>
-                            <!-- <StackLayout Orientation="Horizontal" 
-                                         >
-                                <ffimageloading:CachedImage Aspect="AspectFit"
-			                DownsampleToViewSize="true"
-                            
-                            Source = "{Binding Img}"
-                            CacheType="All"/>
-                                <StackLayout Orientation="Vertical">
-                                    <Button Text="Hisotry" Grid.Row="0" />
-                                    <Button Text="Now" Grid.Row="1" />
-                                    <Button Text="Future" Grid.Row="2" />
-                                </StackLayout>
-                            </StackLayout>
-                        
--->
-                        <!-- <TextCell
-                            Text="{Binding Title}">
-                         <ffimageloading:CachedImage Aspect="AspectFit"
-			                DownsampleToViewSize="true"
-                            Source = "{Binding Image}"
-                            CacheType="All"/>
-                             
-                        </TextCell>-->
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
             <!--Poziomy tryb powinien obsługiwać 4/5 gier, pionowy 3-->
             <!-- Nie znalaziono sposobu na ustawienie gier o mniejszej wielkości na środku -->
             <!-- Kręcenie się elementu podczas ładowania bazy z offline do online, tak samo jak w przypadku aplikacji seriali-->
-            <!--
-            <CollectionView x:Name="gameListView"
-                        SelectionMode="Single"
-                        Margin="5, 0, 5, 0">
-                <CollectionView.ItemsLayout>
-                   
-                    <GridItemsLayout Orientation="Vertical" Span="1"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate >
-                    <DataTemplate >
-                        <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label Text="{Binding Title}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView> -->
-            <!--
-            <StackLayout>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                    <Image Source="https://images-na.ssl-images-amazon.com/images/I/91AJ7qaZK4L._SL1500_.jpg" 
-                       Grid.Column="0" 
-                       WidthRequest="100"/>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Button Text="Hisotry" Grid.Row="0" />
-                        <Button Text="Now" Grid.Row="1" />
-                        <Button Text="Future" Grid.Row="2" />
-                    </Grid>
-                </StackLayout>
-            </ScrollView>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

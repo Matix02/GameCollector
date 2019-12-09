@@ -13,23 +13,20 @@ namespace GameCollector
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
+        User user;
         public RegisterPage()
         {
             InitializeComponent();
+            user = new User();
+            containerStackLayout.BindingContext = user;
+
         }
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
             if(passwordEntry.Text == confirmPasswordEntry.Text)
             {
-                User user = new User()
-                {
-                    //Zmienić z bazy danych String na Int przy ID User
-                    Nickname = nickEntry.Text,
-                    Email = emailEntry.Text,
-                    Password = passwordEntry.Text,
-                    Type = "user"
-                };
+
                 bool response = await User.RegisterUser(user);
 
                 if(response)

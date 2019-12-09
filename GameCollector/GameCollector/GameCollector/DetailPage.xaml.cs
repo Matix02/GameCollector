@@ -1,5 +1,6 @@
 ﻿using GameCollector.Logic;
 using GameCollector.Model;
+using GameCollector.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,26 +18,32 @@ namespace GameCollector
     {
         readonly UserGame selectedGame;
         public ObservableCollection<UserDlc> MyGames;
+        DetailVM viewModel;
 
         public DetailPage(UserGame selectedGame)
         {
-            //pozamieniać nazwy tychże list Obser..., jednakowość w tym przypadku not good
-            //dodać zabezpiecznie, że jak nie ma internetu to nie wchodzi się do części bazy "Game" poprzez if
+//pozamieniać nazwy tychże list Obser..., jednakowość w tym przypadku not good
+//dodać zabezpiecznie, że jak nie ma internetu to nie wchodzi się do części bazy "Game" poprzez if
             InitializeComponent();
             this.selectedGame = selectedGame;
             imgBtnPlayed.BackgroundColor = Color.White;
-         //BindingContext to Controls
+
+//BindingContext to Controls
             btnMainRate.Text = selectedGame.Rate.ToString();
             imgBG.Source = selectedGame.BackgroundImg;
             imgCover.Source = selectedGame.Img;
-            
-         //Binding List 
+
+ //Binding List 
             MyGames = new ObservableCollection<UserDlc>();
             foreach (var submenu in selectedGame.UserDlcs)
             {
                 MyGames.Add(submenu);
             }
             LvDlcs.ItemsSource = MyGames;
+
+            var assembly = typeof(DetailVM);
+            viewModel = new DetailVM();
+            BindingContext = viewModel;
         }
         protected async override void OnAppearing()
          {
@@ -83,7 +90,6 @@ namespace GameCollector
 
         private async void  ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            //Utworzyć funkcję, do tych pętl, bo powtarzany jest KOD !!!!
             foreach (var submenu in selectedGame.UserDlcs)
             {
                 bool responseDlc = await UserDlc.DeleteDlc(submenu.ID);
