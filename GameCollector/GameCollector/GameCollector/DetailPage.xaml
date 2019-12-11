@@ -13,7 +13,6 @@
                      Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        
         <ScrollView>
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
@@ -99,7 +98,7 @@
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
                                          Clicked="List_Clicked"
-                                          ClassId="Want"/> 
+                                          ClassId="Future"/> 
                         </FlexLayout>
                     </Frame>
                     <Frame 
@@ -121,7 +120,7 @@
                                          BackgroundColor="White"
                                          HorizontalOptions="Center"
                                          Clicked="List_Clicked"
-                                         ClassId="Future"/> 
+                                         ClassId="History"/> 
                         </FlexLayout>
                     </Frame>
                 </Grid>

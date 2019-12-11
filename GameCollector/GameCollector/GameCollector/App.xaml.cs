@@ -1,4 +1,7 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿using GameCollector.Model;
+using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +15,7 @@ namespace GameCollector
             new MobileServiceClient(
                 "https://collectorgameapp.azurewebsites.net"
                 );
+        public static IMobileServiceSyncTable<UserGame> userGameTable;
         public static int myId = 0;
         public App()
         {
@@ -26,6 +30,12 @@ namespace GameCollector
             MainPage = new NavigationPage(new MainPage());
 
             DatabaseLocation = databaseLocation;
+
+            var store = new MobileServiceSQLiteStore(databaseLocation);
+            store.DefineTable<UserGame>();
+
+            MobileService.SyncContext.InitializeAsync(store);
+            userGameTable = MobileService.GetSyncTable<UserGame>();
         }
 
         protected override void OnStart()

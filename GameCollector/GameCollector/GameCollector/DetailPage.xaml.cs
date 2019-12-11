@@ -27,25 +27,24 @@ namespace GameCollector
             InitializeComponent();
             this.selectedGame = selectedGame;
             imgBtnPlayed.BackgroundColor = Color.White;
-
+            
 //BindingContext to Controls
-            btnMainRate.Text = selectedGame.Rate.ToString();
+            //btnMainRate.Text = selectedGame.Rate.ToString();
             imgBG.Source = selectedGame.BackgroundImg;
             imgCover.Source = selectedGame.Img;
 
  //Binding List 
             MyGames = new ObservableCollection<UserDlc>();
-            foreach (var submenu in selectedGame.UserDlcs)
+        /*    foreach (var submenu in selectedGame.UserDlcs)
             {
                 MyGames.Add(submenu);
-            }
-            LvDlcs.ItemsSource = MyGames;
+            }*/
+          //  LvDlcs.ItemsSource = await UserGame.GetMyDlcFromList(selectedGame);
 
             contacts = new RateDlcVM();
             BindingContext = contacts;
-
-
         }
+
         protected async override void OnAppearing()
          {
             base.OnAppearing();
@@ -58,23 +57,13 @@ namespace GameCollector
             imgBtnPlaying.Source = imgSource[1];
             imgBtnPlayed.Source = imgSource[2];
 
-           /* switch (nameList.Trim()) {
-                case "History":
-                    imgBtnWant.Source = "wantOffHeist.png";
-                    imgBtnPlaying.Source = "playingOffHeist.png";
-                    imgBtnPlayed.Source = "playedOnHeist.png";
-                    break;
-                case "Future":
-                    imgBtnWant.Source = "wantOnHeist.png";
-                    imgBtnPlaying.Source = "playingOffHeist.png";
-                    imgBtnPlayed.Source = "playedOffHeist.png";
-                    break;
-                case "Current":
-                    imgBtnWant.Source = "wantOffHeist.png";
-                    imgBtnPlaying.Source = "playingOnHeist.png";
-                    imgBtnPlayed.Source = "playedOffHeist.png";
-                    break;
-            }*/
+            int rate = await UserGame.GetGameRate(selectedGame.ID);
+            btnMainRate.Text = rate.ToString();
+
+            await LvDlcs.FadeTo(0, 500);
+            LvDlcs.ItemsSource = await UserGame.GetMyDlcFromList(selectedGame);
+            await LvDlcs.FadeTo(1, 1000);
+
             var games = await Game.InfoGame(nameGame);
             foreach(var game in games)
             {

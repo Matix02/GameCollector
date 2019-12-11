@@ -104,7 +104,6 @@ namespace GameCollector
                 List = chosenList
             };
 
-                
                 await UserGame.AddGame(userGame);
                 var games = await UserGame.GetMyGame();
                 id = games.LastOrDefault().ID;

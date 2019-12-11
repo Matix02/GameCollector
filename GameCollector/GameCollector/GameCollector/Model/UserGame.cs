@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GameCollector.Model
 {
-    public class UserGame : INotifyPropertyChanged
+    public class UserGame
     {
         public User User { get; set; }
         public IList<UserDlc> UserDlcs { get; set; }
@@ -23,7 +23,6 @@ namespace GameCollector.Model
         public int User_ID { get; set; }
         public string List { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public static async Task<List<UserGame>> GetMyGame()
         {
@@ -46,6 +45,43 @@ namespace GameCollector.Model
                         MyGames.Add(game);
                 }
                 return MyGames;
+            }
+        }
+        public static async Task<IEnumerable<UserDlc>> GetMyDlcFromList(UserGame selectedGame)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                ObservableCollection<UserDlc> MyGames = new ObservableCollection<UserDlc>();
+                var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/api/Users");
+                var games = JsonConvert.DeserializeObject<List<UserGame>>(response);
+                foreach (var game in games)
+                {
+                    if (game.UserTitle.Equals(selectedGame.UserTitle))
+                    {
+                        foreach (var dlc in game.UserDlcs)
+                            MyGames.Add(dlc);
+                        break;
+                    }
+                }
+                return MyGames;
+            }
+        }
+        public static async Task<int> GetGameRate(int id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                int i = 5;
+                var response = await client.GetStringAsync("https://collectorgameapp.azurewebsites.net/api/Users");
+                var json = JsonConvert.DeserializeObject<List<UserGame>>(response);
+                foreach(var game in json)
+                {
+                    if(id == game.ID)
+                    {
+                        i = game.Rate;
+                        break;
+                    }
+                }
+                return i;
             }
         }
         public static async Task<bool> AddGame(UserGame userGame)

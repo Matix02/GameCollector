@@ -52,12 +52,12 @@ namespace GameCollector
                             playing++;
                             lPlaying.Text = playing.ToString();
                         }
-                        else if(game.List.Trim() == "History")
+                        else if(game.List.Trim() == "Future")
                         {
                             played++;
                             lPlayed.Text = played.ToString();
                         }
-                        else if(game.List.Trim() == "Future")
+                        else if(game.List.Trim() == "History")
                         {
                             want++;
                             lToPlay.Text = want.ToString();

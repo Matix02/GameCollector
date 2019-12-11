@@ -29,7 +29,11 @@ namespace GameCollector
             base.OnAppearing();
             string list = "Current";
             var games = await UserGame.GetMyGameFromList(list);
+
+            await myGameLv.FadeTo(0, 500);
             myGameLv.ItemsSource = games;
+            await myGameLv.FadeTo(1, 1000);
+
         }
 
         private async void GameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

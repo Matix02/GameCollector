@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace GameCollector.Model
 {
-    public class UserDlc : INotifyPropertyChanged
+    public class UserDlc 
     {
         public int ID { get; set; }
         public string DlcTitle { get; set; }
         public string Img { get; set; }
         public int Rate { get; set; }
         public int Game_ID { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         //Stworzenie wyszukiwacza do WebApi, gdzie wpisujemy id gry i na wylistuje specjalnie dlc do niego
         //Powód: szybkość zmiany oceny danego DLC 
@@ -30,6 +28,7 @@ namespace GameCollector.Model
                 return response.IsSuccessStatusCode;
             }
         }
+
         public static async Task<bool> DeleteDlc(int id)
         {
             using (HttpClient client = new HttpClient())
@@ -49,10 +48,6 @@ namespace GameCollector.Model
                     "https://collectorgameapp.azurewebsites.net/RateDlc/", id), content);
                 return response.IsSuccessStatusCode;
             }
-        }
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
