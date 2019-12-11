@@ -78,9 +78,41 @@ namespace GameCollector.Model
                 return response.IsSuccessStatusCode;
             }
         }
-        private void OnPropertyChanged(string propertyName)
+        public static async Task<bool> EditGameList(int id, UserGame userGame)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            using (HttpClient client = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(userGame);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PutAsync(String.Concat(
+                    "https://collectorgameapp.azurewebsites.net/ChangeList/", id), content);
+                return response.IsSuccessStatusCode;
+            }
+        }
+
+        public static String[] ChooseList(string list)
+        {
+            String[] imgSource = new String[3];
+
+            if (list.Trim().Equals("History"))
+            {
+                    imgSource[0] = "wantOffHeist.png";
+                    imgSource[1] = "playingOffHeist.png";
+                    imgSource[2] = "playedOnHeist.png";
+            }
+            else if (list.Trim().Equals("Future"))
+            {
+                imgSource[0] = "wantOnHeist.png";
+                imgSource[1] = "playingOffHeist.png";
+                imgSource[2] = "playedOffHeist.png";
+            }
+            else
+            {
+                imgSource[0] = "wantOffHeist.png";
+                imgSource[1] = "playingOnHeist.png";
+                imgSource[2] = "playedOffHeist.png";
+            }
+            return imgSource;
         }
     }
 }

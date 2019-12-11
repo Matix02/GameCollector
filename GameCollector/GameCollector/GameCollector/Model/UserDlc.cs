@@ -18,6 +18,8 @@ namespace GameCollector.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        //Stworzenie wyszukiwacza do WebApi, gdzie wpisujemy id gry i na wylistuje specjalnie dlc do niego
+        //Powód: szybkość zmiany oceny danego DLC 
         public static async Task<bool> AddDlc(UserDlc userDlcs)
         {
             using (HttpClient client = new HttpClient())
@@ -44,7 +46,7 @@ namespace GameCollector.Model
                 var json = JsonConvert.SerializeObject(userDlc);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PutAsync(String.Concat(
-                    "https://collectorgameapp.azurewebsites.net/api/RateDlc/", id), content);
+                    "https://collectorgameapp.azurewebsites.net/RateDlc/", id), content);
                 return response.IsSuccessStatusCode;
             }
         }

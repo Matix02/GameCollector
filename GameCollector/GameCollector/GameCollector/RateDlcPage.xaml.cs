@@ -13,31 +13,36 @@ namespace GameCollector
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RateDlcPage : ContentPage
     {
-      //  readonly UserGame userGame;
-        public RateDlcPage(/*UserGame userGame*/)
+        readonly UserDlc userDlc;
+        public RateDlcPage(UserDlc userDlc)
         {
             InitializeComponent();
-           // this.userGame = userGame;
+            this.userDlc = userDlc;
+
         }
 /////////////////Korekta wyjdzie, gdy uda się zaimplementować MVVM pattern
-        private void RateButton_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-        /*    var userGameId = userGame.UserDlcs;
-            
-            foreach(var co in userGameId)
+            try
             {
-               
+                var userDlcId = userDlc.ID;
+                var button = (Button)sender;
+                int clkNb = System.Convert.ToInt32(button.ClassId);
+
+                UserDlc userRate = new UserDlc()
+                {
+                    Rate = clkNb
+                };
+                await UserDlc.EditDlcRate(userDlcId, userRate);
             }
-            var button = (Button)sender;
-            int clkNb = System.Convert.ToInt32(button.ClassId);
-
-            UserGame userRate = new UserGame()
+            catch (NullReferenceException)
             {
-                Rate = clkNb
-            };
-
-            ApiServices apiServices = new ApiServices();*/
-          //  bool response = await apiServices.EditGameRate(userGameId, userRate);
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Oops", "Something goes wrong", "Alright");
+            }
         }
     }
 }

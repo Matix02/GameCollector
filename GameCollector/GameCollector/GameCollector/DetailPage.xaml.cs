@@ -1,6 +1,7 @@
 ﻿using GameCollector.Logic;
 using GameCollector.Model;
 using GameCollector.ViewModel;
+using GameCollector.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,8 +19,7 @@ namespace GameCollector
     {
         readonly UserGame selectedGame;
         public ObservableCollection<UserDlc> MyGames;
-        DetailVM viewModel;
-
+        readonly RateDlcVM contacts;
         public DetailPage(UserGame selectedGame)
         {
 //pozamieniać nazwy tychże list Obser..., jednakowość w tym przypadku not good
@@ -41,9 +41,10 @@ namespace GameCollector
             }
             LvDlcs.ItemsSource = MyGames;
 
-            var assembly = typeof(DetailVM);
-            viewModel = new DetailVM();
-            BindingContext = viewModel;
+            contacts = new RateDlcVM();
+            BindingContext = contacts;
+
+
         }
         protected async override void OnAppearing()
          {
@@ -51,7 +52,13 @@ namespace GameCollector
             string nameGame = selectedGame.UserTitle;
             string nameList = selectedGame.List;
 
-            switch (nameList.Trim()) {
+            String[] imgSource = UserGame.ChooseList(nameList);
+
+            imgBtnWant.Source = imgSource[0];
+            imgBtnPlaying.Source = imgSource[1];
+            imgBtnPlayed.Source = imgSource[2];
+
+           /* switch (nameList.Trim()) {
                 case "History":
                     imgBtnWant.Source = "wantOffHeist.png";
                     imgBtnPlaying.Source = "playingOffHeist.png";
@@ -67,8 +74,7 @@ namespace GameCollector
                     imgBtnPlaying.Source = "playingOnHeist.png";
                     imgBtnPlayed.Source = "playedOffHeist.png";
                     break;
-            }
-
+            }*/
             var games = await Game.InfoGame(nameGame);
             foreach(var game in games)
             {
@@ -92,7 +98,7 @@ namespace GameCollector
         {
             foreach (var submenu in selectedGame.UserDlcs)
             {
-                bool responseDlc = await UserDlc.DeleteDlc(submenu.ID);
+                await UserDlc.DeleteDlc(submenu.ID);
             }
             bool responseGame = await UserGame.DeleteGame(selectedGame.ID);
             
@@ -112,10 +118,22 @@ namespace GameCollector
             Navigation.PushAsync(new RatePage(selectedTitle));
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private async void List_Clicked(object sender, EventArgs e)
         {
-            //var selectedTitle = selectedGame.UserDlcs as UserDlc;
-            //Navigation.PushAsync(new RateDlcPage(selectedTitle));
+            var cmd = (ImageButton) sender;
+            string name = cmd.ClassId;
+            int id = selectedGame.ID;
+            String[] imgSource = UserGame.ChooseList(name);
+            UserGame user = new UserGame()
+            {
+                List = name
+            };
+
+            bool response = await UserGame.EditGameList(id, user);
+
+            imgBtnWant.Source = imgSource[0];
+            imgBtnPlaying.Source = imgSource[1];
+            imgBtnPlayed.Source = imgSource[2];
         }
     }
 }

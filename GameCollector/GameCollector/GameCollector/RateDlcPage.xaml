@@ -15,31 +15,31 @@
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="#007000"
                         CornerRadius="10"
-                        Clicked="RateButton_Clicked"/>
+                        Clicked="Button_Clicked"/>
                 <Button Text="4/5" 
                         ClassId="4"
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="#81E032"
                         CornerRadius="10"
-                        Clicked="RateButton_Clicked"/>
+                        Clicked="Button_Clicked"/>
                 <Button Text="3/5" 
                         ClassId="3"
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="#FFBF00"
                         CornerRadius="10"
-                        Clicked="RateButton_Clicked"/>
+                        Clicked="Button_Clicked"/>
                 <Button Text="2/5" 
                         ClassId="2"
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="#FB7422"
                         CornerRadius="10"
-                        Clicked="RateButton_Clicked"/>
+                        Clicked="Button_Clicked"/>
                 <Button Text="1/5" 
                         ClassId="1"
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="#D2222D"
                         CornerRadius="10"
-                        Clicked="RateButton_Clicked"/>
+                        Clicked="Button_Clicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

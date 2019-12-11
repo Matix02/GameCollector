@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:touch="clr-namespace:TouchEffect;assembly=TouchEffect"
+             
+             xmlns:local="clr-namespace:GameCollector.ViewModel.Commands"
              mc:Ignorable="d"
              x:Class="GameCollector.DetailPage">
     <ContentPage.ToolbarItems>
@@ -86,57 +87,41 @@
                            HorizontalOptions="Fill">
                     <!-- Zmiana list w której gra ma się znajdować poprzez ImageButton-->
                         <FlexLayout Direction="Column">
-                           <!-- <Label Text="Played" HorizontalTextAlignment="Center"
-                                   Margin="10"/>-->
-                            <touch:TouchImage
+                            <!--<touch:TouchImage
                                 x:Name="imgBtnWant"
                                 HorizontalOptions="Center"
                                 BackgroundColor="White" 
-                                IsEnabled="False"
+                                IsEnabled="False">
                                 
-                                >
-                                
-                            </touch:TouchImage>
+                            </touch:TouchImage>-->
 
-                            <!-- <ImageButton x:Name="imgBtnWant"
+                             <ImageButton x:Name="imgBtnWant"
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
-                                         Aspect="Fill" 
-                                         /> -->
+                                         Clicked="List_Clicked"
+                                          ClassId="Want"/> 
                         </FlexLayout>
                     </Frame>
-                    <Frame WidthRequest="50" HeightRequest="50"
+                    <Frame 
+                        WidthRequest="50" HeightRequest="50"
                        Grid.Column="1" CornerRadius="15">
                         <FlexLayout Direction="Column">
-                            <!--<Label Text="Playing:" HorizontalTextAlignment="Center"/> -->
-
-                            <touch:TouchImage
-                                x:Name="imgBtnPlaying"
-                                HorizontalOptions="Center"
-                                BackgroundColor="White" 
-                                
-                                touch:TouchEff.Command="{Binding Command}"/>
-
-                            <!-- <ImageButton x:Name="imgBtnPlaying"
+                            <ImageButton x:Name="imgBtnPlaying"
                                          HorizontalOptions="Center"
                                          BackgroundColor="White"
-                                       Aspect="Fill"  />-->
-                           
+                                         Clicked="List_Clicked"
+                                         ClassId="Current"/>
                         </FlexLayout>
                     </Frame>
                     <Frame WidthRequest="50" HeightRequest="50"
                        Grid.Column="2" CornerRadius="15">
                         <FlexLayout Direction="Column">
                             <!-- <Label Text="Want:" HorizontalTextAlignment="Center"/> -->
-                            <!--ImageButton x:Name="imgBtnPlayed"
+                            <ImageButton x:Name="imgBtnPlayed"
                                          BackgroundColor="White"
-                                   HorizontalOptions="Center"
-                                         Aspect="Fill"/> -->
-                            <touch:TouchImage
-                                x:Name="imgBtnPlayed"
-                                HorizontalOptions="Center"
-                                BackgroundColor="White" 
-                                IsEnabled="False"/>
+                                         HorizontalOptions="Center"
+                                         Clicked="List_Clicked"
+                                         ClassId="Future"/> 
                         </FlexLayout>
                     </Frame>
                 </Grid>
@@ -179,7 +164,7 @@
                 <CarouselView x:Name="LvDlcs"
                           HorizontalOptions="Center"
                           VerticalOptions="CenterAndExpand" Grid.Row="3"
-                      HeightRequest="250">
+                      HeightRequest="250" >
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <FlexLayout>
@@ -191,9 +176,10 @@
                                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                        Aspect="Fill"
                                        Margin="-15"/>
-                                        <StackLayout >
-                                            <Button Text="{Binding Rate}" />
-                                            <!-- *Naprawić picker, żeby ocenianie się dało na button przerzucić-->
+                                        <StackLayout>
+                                            <Button Text="{Binding Rate}" 
+                                                    Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference LvDlcs}}"
+                                                    CommandParameter="{Binding .}"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </Frame>
@@ -213,19 +199,6 @@
                     TranslationX="65"
                     TranslationY="185" 
                         Clicked="Button_Clicked"/>
-                <!--<Picker Title="Rate" 
-                    TranslationX="35"
-                    TranslationY="80"
-                    HorizontalOptions="Center"
-                    VerticalOptions="End"
-                    TitleColor="#2196F3"
-                    TextColor="#2196F3"
-                    WidthRequest="40">
-                <Picker.Items >
-                    <x:String>5</x:String>
-                    <x:String>1</x:String>
-                </Picker.Items>
-            </Picker>-->
             </Grid>
         </ScrollView>
     </ContentPage.Content>
