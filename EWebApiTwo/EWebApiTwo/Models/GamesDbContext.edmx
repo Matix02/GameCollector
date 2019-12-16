@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GgDbOneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Avatar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvatarName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Img" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Developer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeveloperName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dlc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DlcTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Img" Type="text" Nullable="false" />
+          <Property Name="Game_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RelaseDate" Type="date" Nullable="false" />
+          <Property Name="Img" Type="text" Nullable="false" />
+          <Property Name="BackgroundImg" Type="text" Nullable="false" />
+          <Property Name="Platform_ID" Type="int" />
+          <Property Name="Developer_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlatformName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nickname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Avatar" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserDlc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DlcTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Img" Type="text" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Game_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGame">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Img" Type="text" Nullable="false" />
+          <Property Name="BackgroundImg" Type="text" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="List" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Dlc_Game">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Dlc" Type="Self.Dlc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dlc">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Developer">
+          <End Role="Developer" Type="Self.Developer" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="Developer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Platform">
+          <End Role="Platform" Type="Self.Platform" Multiplicity="0..1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="Platform_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDlc_UserGame">
+          <End Role="UserGame" Type="Self.UserGame" Multiplicity="1" />
+          <End Role="UserDlc" Type="Self.UserDlc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserDlc">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGame_UserGame">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserGame" Type="Self.UserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserGame">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GgDbOneModelStoreContainer">
+          <EntitySet Name="Avatar" EntityType="Self.Avatar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Developer" EntityType="Self.Developer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dlc" EntityType="Self.Dlc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDlc" EntityType="Self.UserDlc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGame" EntityType="Self.UserGame" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dlc_Game" Association="Self.FK_Dlc_Game">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Dlc" EntitySet="Dlc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Developer" Association="Self.FK_Game_Developer">
+            <End Role="Developer" EntitySet="Developer" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Platform" Association="Self.FK_Game_Platform">
+            <End Role="Platform" EntitySet="Platform" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDlc_UserGame" Association="Self.FK_UserDlc_UserGame">
+            <End Role="UserGame" EntitySet="UserGame" />
+            <End Role="UserDlc" EntitySet="UserDlc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGame_UserGame" Association="Self.FK_UserGame_UserGame">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserGame" EntitySet="UserGame" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GgDbOneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Avatar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AvatarName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Developer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeveloperName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Game_Developer" FromRole="Developer" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Dlc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DlcTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Game_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="Self.FK_Dlc_Game" FromRole="Dlc" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RelaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BackgroundImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Platform_ID" Type="Int32" />
+          <Property Name="Developer_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Developer" Relationship="Self.FK_Game_Developer" FromRole="Game" ToRole="Developer" />
+          <NavigationProperty Name="Dlcs" Relationship="Self.FK_Dlc_Game" FromRole="Game" ToRole="Dlc" />
+          <NavigationProperty Name="Platform" Relationship="Self.FK_Game_Platform" FromRole="Game" ToRole="Platform" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlatformName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Game_Platform" FromRole="Platform" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserGames" Relationship="Self.FK_UserGame_UserGame" FromRole="User" ToRole="UserGame" />
+        </EntityType>
+        <EntityType Name="UserDlc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DlcTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Game_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserGame" Relationship="Self.FK_UserDlc_UserGame" FromRole="UserDlc" ToRole="UserGame" />
+        </EntityType>
+        <EntityType Name="UserGame">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BackgroundImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="List" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserGame_UserGame" FromRole="UserGame" ToRole="User" />
+          <NavigationProperty Name="UserDlcs" Relationship="Self.FK_UserDlc_UserGame" FromRole="UserGame" ToRole="UserDlc" />
+        </EntityType>
+        <Association Name="FK_Game_Developer">
+          <End Role="Developer" Type="Self.Developer" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="Developer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dlc_Game">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Dlc" Type="Self.Dlc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dlc">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Platform">
+          <End Role="Platform" Type="Self.Platform" Multiplicity="0..1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="Platform_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGame_UserGame">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserGame" Type="Self.UserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserGame">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDlc_UserGame">
+          <End Role="UserGame" Type="Self.UserGame" Multiplicity="1" />
+          <End Role="UserDlc" Type="Self.UserDlc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserDlc">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GgDbOneEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Avatars" EntityType="Self.Avatar" />
+          <EntitySet Name="Developers" EntityType="Self.Developer" />
+          <EntitySet Name="Dlcs" EntityType="Self.Dlc" />
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="Platforms" EntityType="Self.Platform" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserDlcs" EntityType="Self.UserDlc" />
+          <EntitySet Name="UserGames" EntityType="Self.UserGame" />
+          <AssociationSet Name="FK_Game_Developer" Association="Self.FK_Game_Developer">
+            <End Role="Developer" EntitySet="Developers" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dlc_Game" Association="Self.FK_Dlc_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Dlc" EntitySet="Dlcs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Platform" Association="Self.FK_Game_Platform">
+            <End Role="Platform" EntitySet="Platforms" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGame_UserGame" Association="Self.FK_UserGame_UserGame">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserGame" EntitySet="UserGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDlc_UserGame" Association="Self.FK_UserDlc_UserGame">
+            <End Role="UserGame" EntitySet="UserGames" />
+            <End Role="UserDlc" EntitySet="UserDlcs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GgDbOneModelStoreContainer" CdmEntityContainer="GgDbOneEntities1">
+          <EntitySetMapping Name="Avatars">
+            <EntityTypeMapping TypeName="GgDbOneModel.Avatar">
+              <MappingFragment StoreEntitySet="Avatar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AvatarName" ColumnName="AvatarName" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Developers">
+            <EntityTypeMapping TypeName="GgDbOneModel.Developer">
+              <MappingFragment StoreEntitySet="Developer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dlcs">
+            <EntityTypeMapping TypeName="GgDbOneModel.Dlc">
+              <MappingFragment StoreEntitySet="Dlc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DlcTitle" ColumnName="DlcTitle" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="GgDbOneModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RelaseDate" ColumnName="RelaseDate" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="BackgroundImg" ColumnName="BackgroundImg" />
+                <ScalarProperty Name="Platform_ID" ColumnName="Platform_ID" />
+                <ScalarProperty Name="Developer_ID" ColumnName="Developer_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platforms">
+            <EntityTypeMapping TypeName="GgDbOneModel.Platform">
+              <MappingFragment StoreEntitySet="Platform">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GgDbOneModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDlcs">
+            <EntityTypeMapping TypeName="GgDbOneModel.UserDlc">
+              <MappingFragment StoreEntitySet="UserDlc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DlcTitle" ColumnName="DlcTitle" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGames">
+            <EntityTypeMapping TypeName="GgDbOneModel.UserGame">
+              <MappingFragment StoreEntitySet="UserGame">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserTitle" ColumnName="UserTitle" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="BackgroundImg" ColumnName="BackgroundImg" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="List" ColumnName="List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
