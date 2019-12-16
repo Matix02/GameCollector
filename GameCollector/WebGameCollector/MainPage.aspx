@@ -31,13 +31,13 @@
             <tr>
                 <td class="auto-style3">Email:</td>
                 <td>
-            <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="emailTextBox" runat="server" TextMode="Email" ></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style4">Password:</td>
                 <td class="auto-style5">
-            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <asp:TextBox ID="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -46,6 +46,10 @@
                                             
 
                         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Sign in" />
+                                            
+
+                        <br />
+                        <asp:Label ID="emptyLabel" runat="server" Text="Empty Email or Password" Visible="False"></asp:Label>
                                             
 
             </tr>

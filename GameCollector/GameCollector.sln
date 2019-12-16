@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCollector.iOS", "GameCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameCollector", "GameCollector\GameCollector\GameCollector.csproj", "{BC6BC1C7-D3A0-4F7D-9B93-34E60C8289CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGameCollector", "WebGameCollector\WebGameCollector.csproj", "{90D2B4CF-6EE4-4253-B058-1C699240D13D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,18 +73,6 @@ Global
 		{BC6BC1C7-D3A0-4F7D-9B93-34E60C8289CF}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{BC6BC1C7-D3A0-4F7D-9B93-34E60C8289CF}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{BC6BC1C7-D3A0-4F7D-9B93-34E60C8289CF}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Release|iPhone.Build.0 = Release|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{90D2B4CF-6EE4-4253-B058-1C699240D13D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
