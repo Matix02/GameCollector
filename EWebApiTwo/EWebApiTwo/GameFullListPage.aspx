@@ -16,7 +16,7 @@
             <Columns>
                 <asp:BoundField DataField="Expr1" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Expr1" />
                 <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
-                <asp:BoundField DataField="RelaseDate" HeaderText="RelaseDate" SortExpression="RelaseDate" />
+                <asp:BoundField DataField="RelaseDate" HeaderText="RelaseDate" SortExpression="RelaseDate"  DataFormatString="{0:0.00}" HtmlEncode="false"/>
                 <asp:BoundField DataField="PlatformName" HeaderText="PlatformName" SortExpression="PlatformName" />
                 <asp:BoundField DataField="DeveloperName" HeaderText="DeveloperName" SortExpression="DeveloperName" />
                 <asp:BoundField DataField="Img" HeaderText="Img" SortExpression="Img"   HtmlEncode="false"/>

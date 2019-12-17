@@ -12,13 +12,23 @@
         <div>
         </div>
         Add Dlc<br />
+        <asp:Label ID="Label4" runat="server" Text="Game:"></asp:Label>
+        <br />
+        <asp:DropDownList ID="GameDropDownList" runat="server">
+        </asp:DropDownList>
+        <br />
         <asp:Label ID="Label1" runat="server" Text="Title"></asp:Label>
         :<br />
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TitleTextBox" runat="server"></asp:TextBox>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="File Upload"></asp:Label>
+        <asp:Label ID="Label2" runat="server" Text="Image:"></asp:Label>
         <br />
-        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:TextBox ID="ImageTextBox" runat="server"></asp:TextBox>
+        <br />
+        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" Text="Confirm" />
+        <br />
+        <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
         <br />
         <asp:Label ID="Label3" runat="server" Text="Jak ustawić, by było z danej gry dlc powiązane"></asp:Label>
     </form>

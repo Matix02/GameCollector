@@ -13,10 +13,14 @@
             Add Avatar</div>
         <p>
             Title:</p>
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:TextBox ID="AvatarTextBox" runat="server"></asp:TextBox>
         <br />
         Avatar Image:<br />
-        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:TextBox ID="ImageTextBox" runat="server"></asp:TextBox>
+        <br />
+        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" OnClick="Button1_Click" Text="Confirm" />
+        <br />
+        <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False"></asp:Label>
     </form>
 </body>
 </html>
