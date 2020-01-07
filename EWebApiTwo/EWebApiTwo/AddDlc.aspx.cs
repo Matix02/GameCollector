@@ -11,6 +11,7 @@ namespace EWebApiTwo
 {
     public partial class AddDlc : System.Web.UI.Page
     {
+
         SqlDataAdapter da = new SqlDataAdapter();
         SqlConnection sqlMainConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
@@ -18,8 +19,34 @@ namespace EWebApiTwo
             ErrorMessage.Visible = false;
             ErrorMessage.ForeColor = System.Drawing.Color.Red;
 
-            if (!string.IsNullOrEmpty(ImageTextBox.Text) || !string.IsNullOrEmpty(TitleTextBox.Text)
-                || GameDropDownList.SelectedValue != null)
+        }
+        private int CheckGame(String gameName)
+        {
+            int devId = 0;
+            SqlConnection conn = sqlMainConnection;
+            conn.Open();
+
+            String developerId = "SELECT ID " +
+                "FROM     dbo.[Game] " +
+                "WHERE(Title = '" + gameName + "')";
+
+            SqlCommand cmd = new SqlCommand(developerId, conn);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+               devId = Convert.ToInt32(sqlDataReader.GetValue(0));
+                break;
+            }
+            cmd.Dispose();
+            conn.Close();
+            return devId;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(ImageTextBox.Text) & !string.IsNullOrEmpty(TitleTextBox.Text)
+                & GameDropDownList.SelectedValue != null)
             {
                 string title = TitleTextBox.Text;
                 string image = ImageTextBox.Text;
@@ -29,9 +56,9 @@ namespace EWebApiTwo
                 SqlConnection conn = sqlMainConnection;
                 conn.Open();
                 string addAvatar = "INSERT INTO [dbo].[Dlc]([DlcTitle],[Img],[Game_ID])" +
-                    "VALUES('" +title+ "'," +
-                            "'" +image+ "'," +
-                            "'" +b.ToString()+"')";
+                    "VALUES('" + title + "'," +
+                            "'" + image + "'," +
+                            "'" + b.ToString() + "')";
 
                 da.InsertCommand = new SqlCommand(addAvatar, conn);
                 da.InsertCommand.ExecuteNonQuery();
@@ -47,26 +74,6 @@ namespace EWebApiTwo
                 ErrorMessage.Visible = true;
                 ErrorMessage.Text = "Something is Empty!";
             }
-        }
-        private int CheckGame(String gameName)
-        {
-            int devId = 0;
-            SqlConnection conn = sqlMainConnection;
-            conn.Open();
-
-            String developerId = "SELECT ID " +
-                "FROM     dbo.[Game]" +
-                "WHERE(DeveloperName = '" + gameName + "')";
-
-            SqlCommand cmd = new SqlCommand(developerId, conn);
-            SqlDataReader sqlDataReader = cmd.ExecuteReader();
-            while (sqlDataReader.Read())
-            {
-                devId = Convert.ToInt32(sqlDataReader.GetValue(0));
-            }
-            cmd.Dispose();
-            conn.Close();
-            return devId;
         }
     }
 }

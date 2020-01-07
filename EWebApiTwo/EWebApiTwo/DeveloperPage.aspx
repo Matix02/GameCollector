@@ -16,6 +16,7 @@
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
                 <asp:BoundField DataField="DeveloperName" HeaderText="DeveloperName" SortExpression="DeveloperName" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -28,7 +29,20 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT * FROM [Developer]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT * FROM [Developer]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Developer] WHERE [ID] = @original_ID AND [DeveloperName] = @original_DeveloperName" InsertCommand="INSERT INTO [Developer] ([DeveloperName]) VALUES (@DeveloperName)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Developer] SET [DeveloperName] = @DeveloperName WHERE [ID] = @original_ID AND [DeveloperName] = @original_DeveloperName">
+            <DeleteParameters>
+                <asp:Parameter Name="original_ID" Type="Int32" />
+                <asp:Parameter Name="original_DeveloperName" Type="String" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="DeveloperName" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="DeveloperName" Type="String" />
+                <asp:Parameter Name="original_ID" Type="Int32" />
+                <asp:Parameter Name="original_DeveloperName" Type="String" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
     </form>
 </body>
 </html>

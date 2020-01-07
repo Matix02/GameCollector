@@ -14,11 +14,11 @@
         Dlc List<asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
                 <asp:BoundField DataField="DlcTitle" HeaderText="DlcTitle" SortExpression="DlcTitle" />
                 <asp:BoundField DataField="Img" HeaderText="Img" SortExpression="Img" />
                 <asp:BoundField DataField="Game_ID" HeaderText="Game_ID" SortExpression="Game_ID" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

@@ -108,6 +108,7 @@
     <Content Include="UserPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="LoginPage.aspx" />
+    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddAvatarPage.aspx.cs">
@@ -226,6 +227,13 @@
     </Compile>
     <Compile Include="UserPage.aspx.designer.cs">
       <DependentUpon>UserPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

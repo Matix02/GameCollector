@@ -14,7 +14,7 @@
         Add Dlc<br />
         <asp:Label ID="Label4" runat="server" Text="Game:"></asp:Label>
         <br />
-        <asp:DropDownList ID="GameDropDownList" runat="server">
+        <asp:DropDownList ID="GameDropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="Title" DataValueField="Title">
         </asp:DropDownList>
         <br />
         <asp:Label ID="Label1" runat="server" Text="Title"></asp:Label>
@@ -25,10 +25,10 @@
         <br />
         <asp:TextBox ID="ImageTextBox" runat="server"></asp:TextBox>
         <br />
-        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" Text="Confirm" />
+        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" Text="Confirm" OnClick="Button1_Click" />
         <br />
         <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False"></asp:Label>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT DISTINCT Title FROM Game"></asp:SqlDataSource>
         <br />
         <asp:Label ID="Label3" runat="server" Text="Jak ustawić, by było z danej gry dlc powiązane"></asp:Label>
     </form>

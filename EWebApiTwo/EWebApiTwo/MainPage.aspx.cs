@@ -67,7 +67,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 0;
             dr["Title"] = "Games";
             dr["Description"] = "";
-            dr["URL"] = "~/Home.aspx";
+            dr["URL"] = "";
             dt.Rows.Add(dr);
 
             //2nd row of data table  
@@ -76,7 +76,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 0;
             dr["Title"] = "DLCs";
             dr["Description"] = "";
-            dr["URL"] = "~/Customer.aspx";
+            dr["URL"] = "";
             dt.Rows.Add(dr);
 
             //3rd row of data table  
@@ -85,7 +85,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 0;
             dr["Title"] = "Avatars";
             dr["Description"] = "Avatars";
-            dr["URL"] = "~/AboutUs.aspx";
+            dr["URL"] = "";
             dt.Rows.Add(dr);
 
             //4th row of data table  
@@ -94,7 +94,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 0;
             dr["Title"] = "Developers";
             dr["Description"] = "Develoeper";
-            dr["URL"] = "~/Contact.aspx";
+            dr["URL"] = "";
             dt.Rows.Add(dr);
 
             //5th row of data table  
@@ -103,7 +103,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 0;
             dr["Title"] = "Users";
             dr["Description"] = "Users";
-            dr["URL"] = "~/Testimonial.aspx";
+            dr["URL"] = "";
             dt.Rows.Add(dr);
 
 
@@ -113,7 +113,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 1;
             dr["Title"] = "Add";
             dr["Description"] = "Outsourcing page";
-            dr["URL"] = "~/Outsource.aspx";
+            dr["URL"] = "~/MainPage.aspx";
             dt.Rows.Add(dr);
 
             //8th row of data table  
@@ -122,7 +122,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 1;
             dr["Title"] = "List";
             dr["Description"] = "Domestic outsourcing page";
-            dr["URL"] = "~/Domestic.aspx";
+            dr["URL"] = "~/GameFullListPage.aspx";
             dt.Rows.Add(dr);
 
             //9th row of data table  
@@ -131,7 +131,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 2;
             dr["Title"] = "Add";
             dr["Description"] = "International outsourcing page";
-            dr["URL"] = "~/International.aspx";
+            dr["URL"] = "~/AddDlc.aspx";
             dt.Rows.Add(dr);
 
             //10th row of data table  
@@ -140,7 +140,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 2;
             dr["Title"] = "List";
             dr["Description"] = "International outsourcing page";
-            dr["URL"] = "~/International.aspx";
+            dr["URL"] = "~/DlcFullList.aspx";
             dt.Rows.Add(dr);
 
             //11th row of data table  
@@ -149,7 +149,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 3;
             dr["Title"] = "Add";
             dr["Description"] = "International outsourcing page";
-            dr["URL"] = "~/International.aspx";
+            dr["URL"] = "~/AddAvatarPage.aspx";
             dt.Rows.Add(dr);
 
             //12th row of data table  
@@ -158,7 +158,7 @@ namespace EWebApiTwo
             dr["ParentId"] = 3;
             dr["Title"] = "List";
             dr["Description"] = "International outsourcing page";
-            dr["URL"] = "~/International.aspx";
+            dr["URL"] = "~/AvatarList.aspx";
             dt.Rows.Add(dr);
 
             //12th row of data table  
@@ -167,16 +167,16 @@ namespace EWebApiTwo
             dr["ParentId"] = 4;
             dr["Title"] = "List";
             dr["Description"] = "International outsourcing page";
-            dr["URL"] = "~/International.aspx";
+            dr["URL"] = "~/DeveloperPage.aspx";
             dt.Rows.Add(dr);
 
             //13th row of data table  
             dr = dt.NewRow();
             dr["MenuId"] = 13;
             dr["ParentId"] = 5;
-            dr["Title"] = "List";
+            dr["Title"] = "List";   
             dr["Description"] = "International outsourcing page";
-            dr["URL"] = "~/International.aspx";
+            dr["URL"] = "~/UserPage.aspx";
             dt.Rows.Add(dr);
 
 
