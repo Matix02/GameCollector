@@ -99,6 +99,10 @@
         .auto-style29 {
             height: 24px;
             width: 266px;
+            
+        }
+        .auto-style31 {
+            padding:10px;
         } 
   
     .ParentMenu, .ParentMenu:hover {  
@@ -114,17 +118,17 @@
   
         .ParentMenu:hover {  
             background-color: dodgerblue;  
+        }
+
+        .ChildMenu, .ChildMenu:hover {
+            width: 110px;
+            background-color: #fff;
+            color: dodgerblue;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 5px;
         }  
-  
-    .ChildMenu, .ChildMenu:hover {  
-        width: 110px;  
-        background-color: #fff;  
-        color: dodgerblue;  
-        text-align: center;  
-        height: 30px;  
-        line-height: 30px;  
-        margin-top: 5px;  
-    }  
   
         .ChildMenu:hover {  
             background-color: #ccc;  
@@ -143,20 +147,22 @@
 <body>
     <style type="text/css">
         body {
-            font-family: Arial;
-            font-size: 10pt;
+            
+            
             color: #444;
-
+            
         }  
         
     .ParentMenu, .ParentMenu:hover {  
         width: 100px;  
         background-color: dodgerblue;  
-        color: #333;  
+        color: white;  
         text-align: center;  
         height: 30px;  
         line-height: 30px;  
         margin-right: 5px;  
+        
+        
     }  
     .ParentMenu:hover {  
             background-color: #ccc;  
@@ -191,13 +197,15 @@
 </div> 
         <div>
         </div>
-        <asp:Label ID="Label1" runat="server" Text="GameCollector Web" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="GameCollector Web" Font-Bold="True" Font-Size="XX-Large"
+             CssClass="auto-style30"></asp:Label>
         <br />
         <br />
         <br />
         <asp:SqlDataSource ID="PlatformConnetionString" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT [PlatformName] FROM [Platform]"></asp:SqlDataSource>
         <br />
-    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" BackColor="Black" BorderColor="Black" BorderStyle="Groove">  
+    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" BackColor="Black" BorderColor="Black" BorderStyle="Groove"
+         CssClass="auto-style35">  
         <DynamicHoverStyle BackColor="DodgerBlue" />
         <LevelMenuItemStyles>  
             <asp:MenuItemStyle CssClass="ParentMenu" />  
@@ -206,14 +214,14 @@
         </LevelMenuItemStyles>  
         <StaticSelectedStyle CssClass="selected" />  
     </asp:Menu>  
-        <br/>
-            <br />
+       
+            
         &nbsp;<br />
         <asp:SqlDataSource ID="DeveloperConnectionString" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT [DeveloperName] FROM [Developer]"></asp:SqlDataSource>
-        <br/>
+        
        
         <table class="auto-style21" >
-             <table align="center">
+             <table align="left">
             <tr>
                 <td class="auto-style4">
                     
@@ -296,7 +304,8 @@
             <tr>
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style25">
-                    &nbsp;</td>
+        <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False" Font-Size="Large" 
+            ></asp:Label></td>
                 <td class="auto-style16"></td>
                 <td class="auto-style20"></td>
             </tr>
@@ -304,8 +313,7 @@
         </table>
         <p>
             <center>
-        <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False" Font-Size="Large" 
-            ></asp:Label></center>
+        </center>
                 </p>
     </form>
     </body>

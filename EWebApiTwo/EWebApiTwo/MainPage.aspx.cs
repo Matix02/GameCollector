@@ -319,6 +319,10 @@ namespace EWebApiTwo
                                 ErrorMessage.ForeColor = System.Drawing.Color.DodgerBlue;
                                 ErrorMessage.Text = "Your game has been added!";
                                 ErrorMessage.Visible = true;
+                                    TitleTextBox.Text = "";
+                                    txtDate.Text = "";
+                                    ImageBgTextBox.Text = "";
+                                    ImageCoverTextBox.Text = "";
                             }
                             }
                             else
