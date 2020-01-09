@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="GameCollector.ProfilePage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Log Out" Order="Secondary"/>
+        <ToolbarItem Text="Log Out" Order="Secondary" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -64,13 +64,7 @@
             </Grid>
             <ProgressBar Opacity="0.8" ProgressColor="#2196F3" Grid.Row="3"/>
 
-            <Picker Title="Select Langauge" Grid.Row="4" Margin="10"
-                                            >
-                <Picker.Items>
-                    <x:String>Polish</x:String>
-                    <x:String>English</x:String>
-                </Picker.Items>
-            </Picker>
+
             <!-- 
             <TableView Grid.Row="3" HeightRequest="135">
                 <TableRoot>

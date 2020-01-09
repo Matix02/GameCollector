@@ -29,11 +29,18 @@ namespace GameCollector
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
+            busyIndicator.IsRunning = true;
             bool canLogin = await User.Login(emailEntry.Text, passwordEntry.Text);
             if (canLogin)
+            {
                 await Navigation.PushAsync(new HomePage());
+            }
             else
+            {
+                busyIndicator.IsRunning = false;
                 await DisplayAlert("Error", "Something goes wrong. Try again", "Ok");
+                
+            }
         }
     }
 }

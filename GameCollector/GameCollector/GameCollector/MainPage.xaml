@@ -30,5 +30,7 @@
                 TextColor="White"
                 HorizontalOptions="End"
                 Command="{Binding NavCommand}"/>
+        <ActivityIndicator x:Name="busyIndicator" HorizontalOptions="Center" VerticalOptions="Center" 
+                           Color="DodgerBlue" IsRunning="False"/>
     </StackLayout>
 </ContentPage>
