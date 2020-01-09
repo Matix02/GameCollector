@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>GameCollector</title>
             <style type="text/css">
           
     .ParentMenu, .ParentMenu:hover {  
@@ -118,7 +118,7 @@
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
-                <asp:BoundField DataField="DeveloperName" HeaderText="DeveloperName" SortExpression="DeveloperName" />
+                <asp:BoundField DataField="DeveloperName" HeaderText="Developer Name" SortExpression="DeveloperName" />
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />

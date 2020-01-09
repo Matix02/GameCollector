@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>GameCollector</title>
                 <style type="text/css">
           
     .ParentMenu, .ParentMenu:hover {  
@@ -94,7 +94,17 @@
     .level2 {  
         background-color: #fff;  
     }  
-</style> 
+            .auto-style1 {
+                width: 202px;
+            }
+            .auto-style2 {
+                width: 184px;
+                text-align:center;
+            }
+            .auto-style3{
+                text-align:right;
+            }
+        </style> 
     <form id="form1" runat="server">
         <asp:Label ID="Label1" runat="server" Text="GameCollector Web" Font-Bold="True" Font-Size="XX-Large"
              CssClass="auto-style30"></asp:Label>
@@ -112,20 +122,64 @@
         </LevelMenuItemStyles>  
         <StaticSelectedStyle CssClass="selected" />  
     </asp:Menu>
-        <br/>
-                            <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Text="Avatar List"></asp:Label>
-            <br />
-                                    <asp:Label ID="Label3" runat="server" Font-Size="X-Large" Text="Title"></asp:Label>
         <br />
+        <table style="width:100%;">
+            <tr>
+                <td class="auto-style1">
+                            <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Text="Add New Avatar"></asp:Label>
+                </td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style1">
+                                    <asp:Label ID="Label3" runat="server" Font-Size="Large" Text="Title:"></asp:Label>
+                </td>
+                <td class="auto-style2">
 
         <asp:TextBox ID="AvatarTextBox" runat="server"></asp:TextBox>
-        <br />
-        Avatar Image:<br />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style1">
+                    <asp:Label ID="Label4" runat="server" Font-Size="Large" Text="Avatar Image:"></asp:Label>
+                </td>
+                <td class="auto-style2">
         <asp:TextBox ID="ImageTextBox" runat="server"></asp:TextBox>
-        <br />
-        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" OnClick="Button1_Click" Text="Confirm" />
-        <br />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style1">&nbsp;</td>
+                <td class="auto-style2">
+                    <table style="width:100%;">
+                        <tr>
+                            <td class="auto-style3">
+        <asp:Button ID="ConfirmButton" runat="server" OnClick="Button1_Click" Text="Confirm" BackColor="DodgerBlue" ForeColor="White" Height="41px" Width="100px" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style1">&nbsp;</td>
+                <td class="auto-style2">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
         <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <br />
     </form>
 </body>
 </html>

@@ -255,7 +255,7 @@ namespace EWebApiTwo
                     }
                     else
                     {
-                        if(!string.IsNullOrEmpty(ImageCoverTextBox.Text) || !string.IsNullOrEmpty(ImageBgTextBox.Text))
+                        if(!string.IsNullOrEmpty(ImageCoverTextBox.Text) & !string.IsNullOrEmpty(ImageBgTextBox.Text))
                         {
                             if (!string.IsNullOrEmpty(txtDate.Text))
                             {

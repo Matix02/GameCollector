@@ -203,5 +203,15 @@ namespace EWebApiTwo
                 }
             }
         }
+
+        protected void FormView1_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        {
+            
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridView1.DataBind();
+        }
     }
 }

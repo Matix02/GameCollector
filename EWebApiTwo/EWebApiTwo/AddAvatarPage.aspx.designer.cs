@@ -69,6 +69,15 @@ namespace EWebApiTwo
         protected global::System.Web.UI.WebControls.TextBox AvatarTextBox;
 
         /// <summary>
+        /// Kontrolka Label4.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+
+        /// <summary>
         /// Kontrolka ImageTextBox.
         /// </summary>
         /// <remarks>
@@ -78,13 +87,13 @@ namespace EWebApiTwo
         protected global::System.Web.UI.WebControls.TextBox ImageTextBox;
 
         /// <summary>
-        /// Kontrolka Button1.
+        /// Kontrolka ConfirmButton.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button ConfirmButton;
 
         /// <summary>
         /// Kontrolka ErrorMessage.

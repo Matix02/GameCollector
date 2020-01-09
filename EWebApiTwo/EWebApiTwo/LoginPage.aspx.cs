@@ -36,12 +36,14 @@ namespace EWebApiTwo
 
                     if (temp == 1)//Do poprawy komunikaty
                     {
-                        Response.Write("Nice!");
+                        Response.Redirect("MainPage.aspx");
 
                     }
                     else if (temp == 0)//Do poprawy komunikaty
                     {
-                        Response.Write("Wrong Email or Password or You are not an administrator");
+                        emptyLabel.Visible = true;
+                        
+                        emptyLabel.Text = "Wrong Email or Password or You are not an administrator";
                     }
                     cmd.Dispose();
                     conn.Close();

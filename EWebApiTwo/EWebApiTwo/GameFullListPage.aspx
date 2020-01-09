@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>GameCollector</title>
     <style type="text/css">
           
     .ParentMenu, .ParentMenu:hover {  
@@ -94,7 +94,10 @@
     .level2 {  
         background-color: #fff;  
     }  
-</style>  
+            .auto-style1 {
+                height: 27px;
+            }
+        </style>  
     <form id="form1" runat="server" >
         
                     <asp:Label ID="Label1" runat="server" Text="GameCollector Web" Font-Bold="True" Font-Size="XX-Large"
@@ -119,13 +122,13 @@
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="Expr1" HeaderText="Expr1" InsertVisible="False" ReadOnly="True" SortExpression="Expr1" />
+                <asp:BoundField DataField="Expr1" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Expr1" />
                 <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
-                <asp:BoundField DataField="RelaseDate" HeaderText="RelaseDate" SortExpression="RelaseDate" />
-                <asp:BoundField DataField="Img" HeaderText="Img" SortExpression="Img" />
-                <asp:BoundField DataField="BackgroundImg" HeaderText="BackgroundImg" SortExpression="BackgroundImg" />
-                <asp:BoundField DataField="PlatformName" HeaderText="PlatformName" SortExpression="PlatformName" />
-                <asp:BoundField DataField="DeveloperName" HeaderText="DeveloperName" SortExpression="DeveloperName" />
+                <asp:BoundField DataField="PlatformName" HeaderText="Platform" SortExpression="PlatformName" />
+                <asp:BoundField DataField="DeveloperName" HeaderText="Developer" SortExpression="DeveloperName" />
+                <asp:BoundField DataField="RelaseDate" HeaderText="Relase Date" SortExpression="RelaseDate" DataFormatString="{0:d}" />
+                <asp:BoundField DataField="Img" HeaderText="Cover Image" SortExpression="Img" />
+                <asp:BoundField DataField="BackgroundImg" HeaderText="Background Image" SortExpression="BackgroundImg" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -198,36 +201,61 @@
                 <asp:Parameter Name="ID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-                    <asp:Label ID="Label3" runat="server" Text="Dane Szczegółowe:" Visible="False"></asp:Label>
-        <asp:FormView ID="FormView1" runat="server" CellPadding="4" DataKeyNames="ID" DataSourceID="SqlDataSource2" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" GridLines="Both">
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT [ID], [PlatformName] FROM [Platform]"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT [ID], [DeveloperName] FROM [Developer]"></asp:SqlDataSource>
+                    <asp:Label ID="Label3" runat="server" Text="Dane Szczegółowe:" Visible="False" Font-Size="Large"></asp:Label>
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="ID" DataSourceID="SqlDataSource2" AllowPaging="True">
             <EditItemTemplate>
-                ID:
-                <asp:Label ID="IDLabel1" runat="server" Text='<%# Eval("ID") %>' />
-                <br />
-                Title:
-                <asp:TextBox ID="TitleTextBox" runat="server" Text='<%# Bind("Title") %>' />
-                <br />
-                RelaseDate:
-                <asp:TextBox ID="RelaseDateTextBox" runat="server" Text='<%# Bind("RelaseDate") %>' />
-                <br />
-                Img:
-                <asp:TextBox ID="ImgTextBox" runat="server" Text='<%# Bind("Img") %>' />
-                <br />
-                BackgroundImg:
-                <asp:TextBox ID="BackgroundImgTextBox" runat="server" Text='<%# Bind("BackgroundImg") %>' />
-                <br />
-                Platform_ID:
-                <asp:TextBox ID="Platform_IDTextBox" runat="server" Text='<%# Bind("Platform_ID") %>' />
-                <br />
-                Developer_ID:
-                <asp:TextBox ID="Developer_IDTextBox" runat="server" Text='<%# Bind("Developer_ID") %>' />
+                <table style="width:100%;">
+                    <tr>
+                        <td class="auto-style1">ID:</td>
+                        <td class="auto-style1">
+                            <asp:Label ID="IDLabel1" runat="server" Text='<%# Eval("ID") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Title:</td>
+                        <td>
+                            <asp:TextBox ID="TitleTextBox" runat="server" Text='<%# Bind("Title") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RelaseDate:</td>
+                        <td>
+                            <asp:TextBox ID="RelaseDateTextBox" runat="server" Text='<%# Bind("RelaseDate") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cover Image:</td>
+                        <td>
+                            <asp:TextBox ID="ImgTextBox" runat="server" Text='<%# Bind("Img") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Background Image:</td>
+                        <td>
+                            <asp:TextBox ID="BackgroundImgTextBox" runat="server" Text='<%# Bind("BackgroundImg") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Platform:</td>
+                        <td>
+                            <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource3" DataTextField="PlatformName" DataValueField="ID" SelectedValue='<%# Bind("Platform_ID") %>'>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Developer:</td>
+                        <td>
+                            <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource4" DataTextField="DeveloperName" DataValueField="ID" SelectedValue='<%# Bind("Developer_ID") %>'>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Aktualizuj" />
                 &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Anuluj" />
             </EditItemTemplate>
-            <EditRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
-            <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
-            <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
             <InsertItemTemplate>
                 Title:
                 <asp:TextBox ID="TitleTextBox" runat="server" Text='<%# Bind("Title") %>' />
@@ -251,33 +279,43 @@
                 &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Anuluj" />
             </InsertItemTemplate>
             <ItemTemplate>
-                ID:
-                <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
-                <br />
-                Title:
-                <asp:Label ID="TitleLabel" runat="server" Text='<%# Bind("Title") %>' />
-                <br />
-                RelaseDate:
-                <asp:Label ID="RelaseDateLabel" runat="server" Text='<%# Bind("RelaseDate") %>' />
-                <br />
-                Img:
-                <asp:Label ID="ImgLabel" runat="server" Text='<%# Bind("Img") %>' />
-                <br />
-                BackgroundImg:
-                <asp:Label ID="BackgroundImgLabel" runat="server" Text='<%# Bind("BackgroundImg") %>' />
-                <br />
-                Platform_ID:
-                <asp:Label ID="Platform_IDLabel" runat="server" Text='<%# Bind("Platform_ID") %>' />
-                <br />
-                Developer_ID:
-                <asp:Label ID="Developer_IDLabel" runat="server" Text='<%# Bind("Developer_ID") %>' />
+                <table style="width:100%;">
+                    <tr>
+                        <td>ID:</td>
+                        <td>
+                            <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Title:</td>
+                        <td>
+                            <asp:Label ID="TitleLabel" runat="server" Text='<%# Bind("Title") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Relase Date:</td>
+                        <td>
+                            <asp:Label ID="RelaseDateLabel" runat="server" Text='<%# Bind("RelaseDate", "{0:d}") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cover Image:</td>
+                        <td>
+                            <asp:Label ID="ImgLabel" runat="server" Text='<%# Bind("Img") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Background Image:</td>
+                        <td>
+                            <asp:Label ID="BackgroundImgLabel" runat="server" Text='<%# Bind("BackgroundImg") %>' />
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edytuj" />
                 &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Usuń" />
-                &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="Nowy" />
+                &nbsp;
             </ItemTemplate>
-            <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
-            <RowStyle BackColor="White" ForeColor="#003399" />
         </asp:FormView>
     </form>
 </body>

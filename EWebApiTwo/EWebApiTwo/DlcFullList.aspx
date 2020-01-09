@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>GameCollector</title>
             <style type="text/css">
           
     .ParentMenu, .ParentMenu:hover {  
@@ -114,14 +114,14 @@
     </asp:Menu>
         <br/>
                             <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Text="Dlc List"></asp:Label>
-        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
-                <asp:BoundField DataField="DlcTitle" HeaderText="DlcTitle" SortExpression="DlcTitle" />
-                <asp:BoundField DataField="Img" HeaderText="Img" SortExpression="Img" />
-                <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
+                <asp:BoundField DataField="DlcTitle" HeaderText="Dlc Title" SortExpression="DlcTitle" />
+                <asp:BoundField DataField="Title" HeaderText="Game" SortExpression="Title" />
+                <asp:BoundField DataField="Img" HeaderText="Cover Image" SortExpression="Img" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -175,19 +175,38 @@
                 <asp:Parameter Name="ID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:FormView ID="FormView1" runat="server" AllowPaging="True" DataKeyNames="ID" DataSourceID="SqlDataSource2">
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT [Title], [ID] FROM [Game]"></asp:SqlDataSource>
+        <br />
+                    <asp:Label ID="Label3" runat="server" Text="Dane Szczegółowe:" Visible="False" Font-Size="Large"></asp:Label>
+        <asp:FormView ID="FormView1" runat="server" AllowPaging="True" DataKeyNames="ID" DataSourceID="SqlDataSource2" OnPageIndexChanging="FormView1_PageIndexChanging">
             <EditItemTemplate>
-                ID:
-                <asp:Label ID="IDLabel1" runat="server" Text='<%# Eval("ID") %>' />
-                <br />
-                DlcTitle:
-                <asp:TextBox ID="DlcTitleTextBox" runat="server" Text='<%# Bind("DlcTitle") %>' />
-                <br />
-                Img:
-                <asp:TextBox ID="ImgTextBox" runat="server" Text='<%# Bind("Img") %>' />
-                <br />
-                Game_ID:
-                <asp:TextBox ID="Game_IDTextBox" runat="server" Text='<%# Bind("Game_ID") %>' />
+                <table style="width:100%;">
+                    <tr>
+                        <td>ID:</td>
+                        <td>
+                            <asp:Label ID="IDLabel1" runat="server" Text='<%# Eval("ID") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DlcTitle:</td>
+                        <td>
+                            <asp:TextBox ID="DlcTitleTextBox" runat="server" Text='<%# Bind("DlcTitle") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cover Image:</td>
+                        <td>
+                            <asp:TextBox ID="ImgTextBox" runat="server" Text='<%# Bind("Img") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Game:</td>
+                        <td>
+                            <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource3" DataTextField="Title" DataValueField="ID" SelectedValue='<%# Bind("Game_ID") %>'>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Aktualizuj" />
                 &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Anuluj" />
@@ -206,21 +225,30 @@
                 &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Anuluj" />
             </InsertItemTemplate>
             <ItemTemplate>
-                ID:
-                <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
-                <br />
-                DlcTitle:
-                <asp:Label ID="DlcTitleLabel" runat="server" Text='<%# Bind("DlcTitle") %>' />
-                <br />
-                Img:
-                <asp:Label ID="ImgLabel" runat="server" Text='<%# Bind("Img") %>' />
-                <br />
-                Game_ID:
-                <asp:Label ID="Game_IDLabel" runat="server" Text='<%# Bind("Game_ID") %>' />
+                <table style="width:100%;">
+                    <tr>
+                        <td>ID:</td>
+                        <td>
+                            <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DlcTitle:</td>
+                        <td>
+                            <asp:Label ID="DlcTitleLabel" runat="server" Text='<%# Bind("DlcTitle") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cover Image:</td>
+                        <td>
+                            <asp:Label ID="ImgLabel" runat="server" Text='<%# Bind("Img") %>' />
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edytuj" />
                 &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Usuń" />
-                &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="Nowy" />
+                &nbsp;
             </ItemTemplate>
         </asp:FormView>
     </form>

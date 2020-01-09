@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>GameCollector</title>
             <style type="text/css">
           
     .ParentMenu, .ParentMenu:hover {  
@@ -114,7 +114,7 @@
     </asp:Menu>
         <br/>
                             <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Text="Avatar List"></asp:Label>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
@@ -123,6 +123,7 @@
                 <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
                 <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
                 <asp:BoundField DataField="Avatar" HeaderText="Avatar" SortExpression="Avatar" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

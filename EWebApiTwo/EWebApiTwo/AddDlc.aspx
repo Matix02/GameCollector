@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>GameCollector</title>
                     <style type="text/css">
           
     .ParentMenu, .ParentMenu:hover {  
@@ -94,7 +94,52 @@
     .level2 {  
         background-color: #fff;  
     }  
-</style> 
+                .auto-style1 {
+                    height: 26px;
+                    width: 1035px;
+                }
+                .auto-style2 {
+                    height: 26px;
+                    width: 153px;
+                }
+                .auto-style3 {
+                    
+                                height: 26px;
+            width: 183px;
+            text-align: center;
+                    
+                }
+                .auto-style4 {
+                    width: 1035px;
+                }
+                .auto-style5 {
+                    width: 153px;
+                    height: 29px;
+                }
+
+                .auto-style6 {
+                    width: 1035px;
+                    height: 29px;
+                }
+                .auto-style7 {
+                    width:153px;
+                }
+                .auto-style9 {
+                    width: 153px;
+                    height: 30px;
+                }
+                .auto-style11 {
+                    width: 1035px;
+                    height: 30px;
+                }
+                 .auto-style12 {
+                    
+                                height: 26px;
+            width: 183px;
+            text-align: right;
+                    
+                }
+            </style> 
     <form id="form1" runat="server">
         <asp:Label ID="Label5" runat="server" Text="GameCollector Web" Font-Bold="True" Font-Size="XX-Large"
              CssClass="auto-style30"></asp:Label>
@@ -112,25 +157,60 @@
         </LevelMenuItemStyles>  
         <StaticSelectedStyle CssClass="selected" />  
     </asp:Menu>
-        <br/>
-                            <asp:Label ID="Label6" runat="server" Font-Size="X-Large" Text="Avatar List"></asp:Label>
-            <br /><br />
-        <asp:Label ID="Label4" runat="server" Text="Game:"></asp:Label>
         <br />
-        <asp:DropDownList ID="GameDropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="Title" DataValueField="Title">
+        <table style="width:100%;">
+            <tr>
+                <td class="auto-style2">
+                            <asp:Label ID="Label6" runat="server" Font-Size="X-Large" Text="Add Dlc"></asp:Label>
+                </td>
+                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style1">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style9">
+        <asp:Label ID="Label4" runat="server" Text="Game:" Font-Size="Large"></asp:Label>
+                </td>
+                <td class="auto-style3">
+        <asp:DropDownList ID="GameDropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="Title" DataValueField="Title" Width="173px">
         </asp:DropDownList>
-        <br />
-        <asp:Label ID="Label1" runat="server" Text="Title"></asp:Label>
-        :<br />
+                </td>
+                <td class="auto-style11"></td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+        <asp:Label ID="Label1" runat="server" Text="Title" Font-Size="Large"></asp:Label>
+                </td>
+                <td class="auto-style5">
         <asp:TextBox ID="TitleTextBox" runat="server"></asp:TextBox>
-        <br />
-        <asp:Label ID="Label2" runat="server" Text="Image:"></asp:Label>
-        <br />
+                </td>
+                <td class="auto-style6">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style7">
+        <asp:Label ID="Label2" runat="server" Text="Image:" Font-Size="Large"></asp:Label>
+                </td>
+                <td class="auto-style7">
         <asp:TextBox ID="ImageTextBox" runat="server"></asp:TextBox>
-        <br />
-        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" Text="Confirm" OnClick="Button1_Click" />
-        <br />
+                </td>
+                <td class="auto-style6"></td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style12">
+        <asp:Button ID="Button1" runat="server" BackColor="DodgerBlue" ForeColor="White" Text="Confirm" OnClick="Button1_Click" Height="41px" Width="100px"/>
+                </td>
+                <td class="auto-style4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style3">
         <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                </td>
+                <td class="auto-style4">&nbsp;</td>
+            </tr>
+        </table>
+        <br />
+        <br />
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT DISTINCT Title FROM Game"></asp:SqlDataSource>
         <br />
     </form>
