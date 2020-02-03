@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GameCollector.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,6 +62,11 @@ namespace GameCollector.Logic
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public static string GenerateURL()
+        {
+            return Constatns.GAME_SEARCH;
         }
     }
     public class Developer : INotifyPropertyChanged
