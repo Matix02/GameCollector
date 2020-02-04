@@ -62,7 +62,7 @@ namespace GameCollector
         {   
             base.OnAppearing();
             var games = await UserGame.GetMyGame();
-            var gamesListTry = GameLogic.GetGames();
+            var gamesListTry = await GameLogic.GetGames();
             foreach(var game in games)
             {
                 if(game.User_ID == App.myId)

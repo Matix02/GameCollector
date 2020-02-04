@@ -66,7 +66,7 @@ namespace GameCollector.Logic
 
         public static string GenerateURL()
         {
-            return Constatns.GAME_SEARCH;
+            return GameRoot.GAME_SEARCH;
         }
     }
     public class Developer : INotifyPropertyChanged

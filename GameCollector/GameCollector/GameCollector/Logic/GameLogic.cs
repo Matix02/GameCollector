@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -18,8 +19,12 @@ namespace GameCollector.Logic
             {
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
-            }
 
+                var gameRoot = JsonConvert.DeserializeObject<List<Game>>(json);
+
+                games = gameRoot as List<Game>;
+            }
+            //brakuje przypisania z json'a do games, zwraca pustą listę!!!
             return games;
         }
     }
