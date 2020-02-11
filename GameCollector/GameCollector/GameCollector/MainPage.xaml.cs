@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GameCollector
@@ -19,9 +20,17 @@ namespace GameCollector
         HomeVM viewModel;
         public MainPage()
         {
-            InitializeComponent();
-            viewModel = new HomeVM();
-            BindingContext = viewModel;
+            var current = Connectivity.NetworkAccess;
+            if (current == NetworkAccess.Internet)
+            {
+                InitializeComponent();
+                viewModel = new HomeVM();
+                BindingContext = viewModel;
+            }
+            else
+            {
+                DisplayAlert("Error", "Check your Internet Connection", "Ok");
+            }
 
         }
         /*Dodać funkcję logowania offline, jeśli nie ma internetu przeskakuje na konto, 

@@ -119,6 +119,7 @@ namespace GameCollector
                     };
                     Bufor = dodatki;
                     await UserDlc.AddDlc(Bufor);
+                    
                 }
                 await DisplayAlert("Hi", "Your game has been added successfully", "Alright");
             }

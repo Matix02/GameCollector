@@ -1,4 +1,5 @@
-﻿using GameCollector.Logic;
+﻿using GameCollector.Helpers;
+using GameCollector.Logic;
 using GameCollector.Model;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace GameCollector
             await myGameLv.FadeTo(0, 500);
             myGameLv.ItemsSource = games;
             await myGameLv.FadeTo(1, 1000);
+            await AzureAppServiceHelper.SyncAsync();
 
         }
 

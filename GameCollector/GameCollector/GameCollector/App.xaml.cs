@@ -34,8 +34,11 @@ namespace GameCollector
             var store = new MobileServiceSQLiteStore(databaseLocation);
             store.DefineTable<UserGame>();
 
-            MobileService.SyncContext.InitializeAsync(store);
+            MobileService.SyncContext.InitializeAsync(store, 
+                new MobileServiceSyncHandler());
+
             userGameTable = MobileService.GetSyncTable<UserGame>();
+
         }
 
         protected override void OnStart()
