@@ -1,4 +1,4 @@
-# GameColletor
+# GameCollector
 
 GameCollector is a mobile app project, which is building on Microsoft Xamarin, specially with Xamarin.Forms. The app is collecting games for every users diffrently. User chooses which title (game) he is now playing, will play or finished. The titles are come from the Internet - form the Azure MS Cloud Database.
 
